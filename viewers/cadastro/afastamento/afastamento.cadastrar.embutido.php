@@ -95,6 +95,8 @@
 	    showDropdowns: true,
 	    autoApply: true,
 	    autoUpdateInput: true,
+		"timePicker": true,
+		"drops": "up",
 	    locale: {
 	        "format": "DD/MM/YYYY",
 	        "separator": " - ",
@@ -199,7 +201,7 @@ require_once "../../../engine/config.php";
 			<input type="hidden" id="dt_fim_afastamento">
 			<label class="control-label">Escolha o intervalo de datas</label>
 			<i class="form-control-feedback glyphicon glyphicon-calendar"></i>
-			<input id="escolhe_data" name="escolhe_data" class="input-mini form-control" type="text"></input>
+			<input id="escolhe_data" name="escolhe_data" class="input-mini form-control" type="text">
 		</div>
 	</section><!-- Selecionar Datas-->
 	<section class="col-md-8">  <!-- Selecionar Ocorrência-->
