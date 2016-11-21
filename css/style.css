@@ -1,0 +1,320 @@
+/* CSS Document */
+html, body {
+	height: 100%;
+}
+
+main {
+	min-height: 100%;
+	margin:0 auto;
+	padding-bottom: 20vh;
+	margin-top: inherit;
+	vertical-align: center;
+}
+
+#mainlogin {
+	padding-top: 20vh;
+}
+
+#email_login {
+	margin-top: 2vh;
+	margin-bottom: 2vh;
+}
+
+#senha_login {
+	margin-top: 2vh;
+	margin-bottom: 7.5vh;
+}
+
+#icticon {
+	padding-bottom: 6px;
+}
+
+#afasticon {
+	padding-left: 30px;
+}
+
+.mainfooter {
+	padding: 0.5em;
+	color: #aaa;
+	clear: both;
+}
+
+.footertext {
+	color: white;
+	line-height: 54px;
+}
+
+.navbar {
+	min-height: 66px;
+}
+
+.navbar-default {
+	background: #0074ae;
+}
+
+.nav div a {
+	text-decoration: none !important;
+}
+
+.navbar-nav>li>a {
+	line-height: 40px;
+}
+
+.navbar-brand {
+	line-height: 40px;
+}
+
+.navbar .navbar-collapse {
+	text-align: center;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: white;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus
+	{
+	background: #0093dd;
+	color: black;
+} /*Muda o Hover e Focus dos links no toggle da Navbar*/
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus
+	{
+	background-color: white;
+}
+
+.to-functions {
+	min-height: 300px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 300px;
+	font-family: Roboto;
+	font-weight: bold;
+	font-size: 2vw;
+	background: linear-gradient(to bottom, #6D9B28, #8BC633);
+	color: #FFFFFF;
+	margin-top: 10vw;
+}
+
+a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
+	background: #8BC633;
+	border-width: thick;
+}
+
+.text-titulo {
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	font-size: 2vw;
+	color: #0074ae;
+}
+
+.breadcrumb {
+	padding-top: 4.4vw;
+}
+
+.EditarItem:hover {
+	background-color: #8BC633;
+	transition: 0.5s;
+	cursor: pointer;
+}
+
+.ExcluirItem:hover {
+	background-color: #C63333;
+	transition: 0.5s;
+	cursor: pointer;
+}
+
+.ListarAfastamentos:hover {
+	background-color: #f2e394;
+	transition: 0.5s;
+	cursor: pointer;
+}
+
+.DesativarItem:hover {
+	background-color: #FFAB49;
+	transition: 0.5s;
+	cursor: pointer;
+}
+
+.EditarExercicios:hover {
+	background-color: #FFAB49;
+	transition: 0.5s;
+	cursor: pointer;
+}
+
+.CarregaDocentesCurso {
+	margin-bottom: 0.2vw;
+}
+
+.datepicker-center {
+	padding-left: 4vw;
+}
+
+/* Filter Table Style Begin*/
+.filterrow {
+	margin-top: 40px;
+	padding: 10px;
+	padding-bottom: 6vw;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+.clickable:hover {
+	background-color: #478ECB;
+}
+
+.panel-heading div {
+	margin-top: -18px;
+	font-size: 15px;
+}
+
+.panel-heading div span {
+	margin-left: 5px;
+}
+
+.panel-body {
+	display: none;
+}
+
+.bottom-pad {
+	padding-bottom: 30vw;
+}
+
+/* Filter Table Style End*/
+
+/* Sidebar Style Begin */
+.sidebar-pad {
+	padding-top: 13vh;
+	padding-bottom: 13vh;
+	margin-left: -3vw;
+	width: 30%;
+	height: 100%;
+	overflow-y: scroll;
+	z-index: 9;
+	position: fixed;
+}
+
+.sidebar-btn {
+	padding-bottom: 20vw;
+	padding-top: 20vw;
+	margin-left: 24vw;
+	width: 20px;
+	max-width: 20px;
+	height: 100%;
+	position: fixed;
+	z-index: 10;
+}
+
+.sidebar-content {
+	margin-left: 18vw;
+	width: 72%;
+	z-index: 8;
+}
+
+#sidebar-pad-scroll {
+	padding: 20px;
+	padding-bottom: 120vh;
+}
+/* Sidebar Style End */
+.table-overflow {
+    max-width: 180vh;
+    max-height: 100vh;
+    overflow: scroll;
+    overflow-x: auto;
+    overflow-y: inherit;
+    padding-bottom: 7vh;
+}
+
+div.table-overflow {
+	margin: 0 auto;
+	margin-bottom:15vh;
+}
+
+.ui-datepicker-calendar {
+        display: none;
+        }
+		
+/* Print Page Styles */
+
+.ufvjmlogo {
+	padding-left:8vw;
+	}
+	
+.tablesize  {
+	min-width:30vw;
+	}
+	
+.lessmarginbot {
+	margin-bottom: 0;
+	}
+.lessmargintop {
+	margin-top: 0;
+	}
+	
+.tabspaceleft {
+	margin-left:2vw;
+	}
+
+.tabspaceright {
+	float:left;
+	width:40vw;
+	}
+
+.tabspacerightbottom {
+	float:left;
+	width:25vw;
+	}
+
+.simpleborder {
+	border: 1px solid black;
+    border-collapse: collapse;
+	}
+.docenteheader {
+	margin-bottom:-3vh;
+	}
+	
+.rel_ocorrencia {
+		width:8vw;
+	}
+
+.rel_descricao {
+		width:24vw;
+	}
+	
+.rel_quantidade {
+		width:8vw;
+	}
+	
+.rel_diasdomes {
+		width:25vw;
+	}
+
+.rel_endline {
+	border: 2px solid black;
+    border-collapse: collapse;
+	width:65vw;
+	margin-top: 8vh;
+	margin-bottom: 2vh;	
+	}
+
+.printdate {
+	float:left;
+	}
+.signatureline {
+	border-top:1px solid black;
+    border-collapse: collapse;
+	}
+.signaturemargin{
+	padding-top:7vh;
+	border: 1px solid black;
+    border-collapse: collapse;
+	}
+
+.navprintmargin2{
+	margin-top:14vh;
+	}
+	
+.paragmargin {
+	margin-bottom:0px;
+	}
