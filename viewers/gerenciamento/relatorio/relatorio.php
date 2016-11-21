@@ -7,7 +7,7 @@ $MesForm = $_POST['mes'];
 $curso = $_POST['curso'];
 $efetivo = $_POST['efetivo'];
 list($mes, $ano)=explode("/", $MesForm);
-
+$ObservText = $_POST['observtext'];
 
 
 function fixfirstdate($string, $newmes, $newano)
@@ -310,12 +310,20 @@ date_default_timezone_set( 'America/Sao_Paulo' );
 		<?php
 	}
 ?>
-<section class="col-md-2"></section>
-<section class="col-md-8 signaturemargin tablesize printcenter">
-	<span class="printdate signaturetop col-md-3"><h4><strong>Em <?php echo date('d-m-Y');?></strong></h4></span>
+
+<section class="col-md-8 centermarginbottom">
+  <p>Este documento foi elaborado com base nas informações/solicitações apresentadas pelos respectivos servidores à Direção do ICT, atendendo, primordialmente, ao disposto no inciso I do Art. 117 da Lei 8.112/90. Desta forma, o documento pode ser passível de alteração caso o(s) servidor(es) não tenha(m) cumprido com seu dever de comunicar à chefia sobre ausências do local de trabalho.</p>
+</section>
+
+<section class="col-md-8 centermarginbottom">
+  <p><?php echo $ObservText; ?></p>
+</section>
+
+<section class="col-md-8 signaturemargin tablesize printcenter centermarginbottom">
+    <span class="printdate signaturetop col-md-3"><h4><strong>Em <?php echo date('d-m-Y');?></strong></h4></span>
     <span class="signatureline signaturetop col-md-5"><h4><strong>ENCARREGADO DA FREQUÊNCIA</strong></h4></span>
     <span class="signatureline signaturetop col-md-4"><h4><strong>CHEFE DA SEÇÃO</strong></h4></span>
 </section>
-<section class="col-md-2"></section>
+
 
 </body>

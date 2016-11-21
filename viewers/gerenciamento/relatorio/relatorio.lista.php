@@ -1,6 +1,6 @@
 
 <link rel="stylesheet" type="text/css" href="../css/select2.css" />
-<link rel="stylesheet" type="text/css" href="../css/boostrap-datepicker3.css" />
+<link rel="stylesheet" type="text/css" href="../css/bootsrap-datepicker3.css" />
 <script type="text/javascript" src="../js/moment.min.js"></script>
 <script type="text/javascript" src="../js/jquery.cascade-select.js"></script>
 <script type="text/javascript" src="../js/select2.js"></script>
@@ -26,8 +26,9 @@
 			var curso = $('#curso').val();
 			var mes = $('#datepicker').val();
 			var efetivo = $('#efetivo').val();
+			var observtext = $('#observtext').val();
 			$('#loader').empty();
-			$('#printloader').load('gerenciamento/relatorio/relatorio.php',{mes: mes, curso: curso, efetivo:efetivo});			
+			$('#printloader').load('gerenciamento/relatorio/relatorio.php',{mes: mes, curso: curso, efetivo:efetivo, observtext:observtext});			
 		});
 
 		
@@ -134,6 +135,15 @@ require_once "../../../engine/config.php";
 </section> <!-- Primeira Linha -->
 
 <section class="row"> <!-- Segunda Linha -->
+  <section class="col-md-12">
+    <div class="form-group">
+    	<label for="exampleTextarea">Observação:</label>
+    	<textarea class="form-control" id="observtext" rows="3"></textarea>
+  	</div>
+  </section>
+</section> <!-- Segunda Linha -->
+
+<section class="row"> <!-- Terceira Linha -->
     <section class="col-md-12 text-right">
         <section class="btn-group" role="group">
                 <button type="button" class="btn btn-success" id="Gerar">
@@ -141,6 +151,6 @@ require_once "../../../engine/config.php";
                 </button>
         </section>
     </section>
-</section> <!-- Segunda Linha-->
+</section> <!-- Terceira Linha-->
 </div> <!-- Fecha Well -->
 

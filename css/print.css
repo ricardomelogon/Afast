@@ -66,4 +66,30 @@
 		display:none;
 		}
 	
+	div{
+        page-break-inside: avoid;
+		position: relative;
+    }
+	
+	section{
+        page-break-inside: avoid;
+		position: relative;
+    }
+
+	p{
+        page-break-inside: avoid;
+		position: relative;
+    }
+
+	*{
+        page-break-inside: avoid;
+		position: relative;
+    }
+	
+	body {
+    position: relative;
+	}
+	
+	
+	
 	}
