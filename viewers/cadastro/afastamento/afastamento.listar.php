@@ -127,6 +127,7 @@
 	$('#escolhe_data').daterangepicker({
 	    "showDropdowns": false,
 	    "autoApply": true,
+		"timePicker": true,
 	    "locale": {
 	        "format": "DD/MM/YYYY",
 	        "separator": " - ",

@@ -42,13 +42,21 @@ switch ($action) {
 		break;
 	
 	case 'update' :
-		
-		$res = $Item->Update ();
-		
-		if ($res === NULL) {
-			$res = 'true';
-		} else {
-			$res = 'false';
+		$res = $Item->ReadAllOverlapsUpdate($id_docente, $dt_inicio_afastamento, $dt_fim_afastamento);
+		//var_dump($res);
+		if(empty($res))
+		{
+			//var_dump($res);
+		  $res = $Item->Update ();
+		  if ($res === NULL) {
+			  $res = 'true';
+		  } else {
+			  $res = 'false';
+		  }
+		}
+		else
+		{
+			$res = "false";
 		}
 		echo $res;
 		
