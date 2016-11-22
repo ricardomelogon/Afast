@@ -21,14 +21,23 @@ $Item->SetValues ( $id_afastamento, $dt_inicio_afastamento, $dt_fim_afastamento,
 switch ($action) {
 	case 'create' :
 		
-		$res = $Item->Create ();
-		if ($res === NULL) {
-			$res = "true";
-		} else {
+		$res = $Item->ReadAllOverlaps($id_docente, $dt_inicio_afastamento, $dt_fim_afastamento);
+		//var_dump($res);
+		if(empty($res))
+		{
+			//var_dump($res);
+		  $res = $Item->Create ();
+		  if ($res === NULL) {
+			  $res = "true";
+		  } else {
+			  $res = "false";
+		  }
+		}
+		else
+		{
 			$res = "false";
 		}
-		
-		echo $res;
+		  echo $res;
 		
 		break;
 	

@@ -57,7 +57,7 @@
 						  $('#afast_sistema').click();
 					  }
 					  else{
-						  alert('Erro ao conectar com banco de dados. Aguarde e tente novamente em alguns instantes.');	
+						  alert('Erro ao inserir dados.');	
 					  }
 				 },
 				 
