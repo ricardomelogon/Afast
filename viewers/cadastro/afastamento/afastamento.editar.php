@@ -289,7 +289,7 @@ $Docente = $Docente->Read( $_POST ['id'] );
 <section class="row"> <!-- Terceira Linha-->
 	<section class="col-md-12"> <!-- Campo de Observação -->
 		<label for="observ_afastamento">Observação:</label>
-		<textarea class="form-control" rows="2" id="observ_afastamento"></textarea>
+		<textarea class="form-control" rows="2" id="observ_afastamento" maxlength="195"></textarea>
 	</section> <!-- Campo de Observação -->
 </section> <!-- Terceira Linha-->
 
