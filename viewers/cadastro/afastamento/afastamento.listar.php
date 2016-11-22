@@ -285,7 +285,7 @@ require_once "../../../engine/config.php";
 </section> <!-- Primeira Linha -->	
 <div class="container col-md-12" id="DetalhesAfastamento">
 <section class="row"> <!-- Segunda Linha -->
-	<section class="col-md-3"> <!-- Selecionar Datas-->
+	<section class="col-md-4"> <!-- Selecionar Datas-->
 		<div class="form-group has-feedback has-feedback-right">
 			<input type="hidden" id="dt_inicio_afastamento">
 			<input type="hidden" id="dt_fim_afastamento">
@@ -294,7 +294,7 @@ require_once "../../../engine/config.php";
 			<input id="escolhe_data" name="escolhe_data" class="input-mini form-control" type="text" disabled="disabled"></input>
 		</div>
 	</section><!-- Selecionar Datas-->
-	<section class="col-md-9">  <!-- Selecionar Ocorrência-->
+	<section class="col-md-8">  <!-- Selecionar Ocorrência-->
 	<div class="form-group idocorr">
 		<label for="id_ocorrencia">Ocorrência:</label>
 		<select class="form-control" id="id_ocorrencia" style="width: 100%" disabled="disabled">

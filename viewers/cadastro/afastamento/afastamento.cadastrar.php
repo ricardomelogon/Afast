@@ -7,8 +7,8 @@
 <script type="text/javascript" src="../js/daterangepicker.js"></script>
 <script>
 	$(document).ready(function(e) {
-		$('#dt_inicio_afastamento').val(moment().format('L'));
-		$('#dt_fim_afastamento').val(moment().format('L'));
+		//$('#dt_inicio_afastamento').val(moment().format('L'));
+		//$('#dt_fim_afastamento').val(moment().format('L'));
 		/*bootbox.alert('<br /><div class="alert alert-danger"><strong>Atenção!</strong><p>Este sistema ainda não controla múltiplos afastamentos em uma mesma data.</p></div>');*/
 
 		$('#bread_home').click(function(e) {
@@ -196,16 +196,16 @@ require_once "../../../engine/config.php";
 </section> <!-- Primeira Linha -->
 
 <section class="row"> <!-- Segunda Linha -->
-	<section class="col-md-3"> <!-- Selecionar Datas-->
+	<section class="col-md-4"> <!-- Selecionar Datas-->
 		<div class="form-group has-feedback has-feedback-right">
-			<input type="hidden" id="dt_inicio_afastamento">
-			<input type="hidden" id="dt_fim_afastamento">
+			<input type="hidden" id="dt_inicio_afastamento" value="<?php echo date("Y-m-d");?>">
+			<input type="hidden" id="dt_fim_afastamento" value="<?php echo date("Y-m-d");?>">
 			<label class="control-label">Escolha o intervalo de datas</label>
 			<i class="form-control-feedback glyphicon glyphicon-calendar"></i>
 			<input id="escolhe_data" name="escolhe_data" class="input-mini form-control" type="text">
 		</div>
 	</section><!-- Selecionar Datas-->
-	<section class="col-md-9">  <!-- Selecionar Ocorrência-->
+	<section class="col-md-8">  <!-- Selecionar Ocorrência-->
 	<div class="form-group">
 		<label for="id_ocorrencia">Selecionar a Ocorrência:</label>
 		<select class="form-control" id="id_ocorrencia" style="width: 100%">

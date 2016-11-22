@@ -7,8 +7,8 @@
 <script type="text/javascript" src="../js/daterangepicker.js"></script>
 <script>
 	$(document).ready(function(e) {
-		$('#dt_inicio_afastamento').val(moment().format('L'));
-		$('#dt_fim_afastamento').val(moment().format('L'));
+		//$('#dt_inicio_afastamento').val(moment().format('L'));
+		//$('#dt_fim_afastamento').val(moment().format('L'));
 
 		$('#bread_home').click(function(e) {
 			e.preventDefault();
@@ -197,8 +197,8 @@ require_once "../../../engine/config.php";
 <section class="row"> <!-- Segunda Linha -->
 	<section class="col-md-4"> <!-- Selecionar Datas-->
 		<div class="form-group has-feedback has-feedback-right">
-			<input type="hidden" id="dt_inicio_afastamento">
-			<input type="hidden" id="dt_fim_afastamento">
+			<input type="hidden" id="dt_inicio_afastamento" value="<?php echo date("Y-m-d");?>">
+			<input type="hidden" id="dt_fim_afastamento" value="<?php echo date("Y-m-d");?>">
 			<label class="control-label">Escolha o intervalo de datas</label>
 			<i class="form-control-feedback glyphicon glyphicon-calendar"></i>
 			<input id="escolhe_data" name="escolhe_data" class="input-mini form-control" type="text">
