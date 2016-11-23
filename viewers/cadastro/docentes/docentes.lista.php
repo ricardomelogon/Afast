@@ -54,6 +54,10 @@
 			$('#docenteloader').load('cadastro/afastamento/afastamento.cadastrar.embutido.php');
 		});
 		
+		$('#InserirAfastamentoSerie').click(function(e) {
+			e.preventDefault();
+			$('#docenteloader').load('cadastro/afastamento/afastamento.cadastrar.serie.php');
+		});
 		
 		//Collapse Control
 
@@ -169,6 +173,11 @@ $Data = getdate ();
 		<section class="col-md-12">
 			<button class="btn btn-warning col-md-12" id="InserirAfastamento"
 				type="button">Inserir Afastamentos</button>
+		</section>
+        
+        <section class="col-md-12">
+			<button class="btn btn-warning col-md-12" id="InserirAfastamentoSerie"
+				type="button">Inserir Afastamentos em Série</button>
 		</section>
 		
 		<div id="sidebar-pad-scroll"></div>
