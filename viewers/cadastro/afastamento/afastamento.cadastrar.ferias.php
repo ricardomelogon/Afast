@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" type="text/css" href="../css/select2.css" />
 <link rel="stylesheet" type="text/css" href="../css/daterangepicker.css" />
 <script type="text/javascript" src="../js/moment.min.js"></script>
@@ -7,9 +6,6 @@
 <script type="text/javascript" src="../js/daterangepicker.js"></script>
 <script>
 	$(document).ready(function(e) {
-		//$('#dt_inicio_afastamento').val(moment().format('L'));
-		//$('#dt_fim_afastamento').val(moment().format('L'));
-		/*bootbox.alert('<br /><div class="alert alert-danger"><strong>Atenção!</strong><p>Este sistema ainda não controla múltiplos afastamentos em uma mesma data.</p></div>');*/
 
 		$('#bread_home').click(function(e) {
 			e.preventDefault();
@@ -124,14 +120,16 @@
 	  //console.log($('#escolhe_data').data());
 
 	});
-
-	$('#escolhe_data').on('apply.daterangepicker', function(ev, picker) {
-		$('#dt_inicio_afastamento').val(picker.startDate.format('YYYY-MM-DD'));
-		$('#dt_fim_afastamento').val(picker.endDate.format('YYYY-MM-DD'));
-	});
-	$("#id_ocorrencia").select2({
-		  language: "pt-BR",
-		  placeholder: "Digite para buscar a ocorrência"
+	/*
+	$('body').on('focus',".datepicker_recurring_start", function(){
+    $(this).datepicker();
+	});​
+	*/
+	$('body').on('focus',".escolhe_data", function(){
+	  $('.escolhe_data').on('apply.daterangepicker', function(ev, picker) {
+		  $(this).next().val(picker.startDate.format('YYYY-MM-DD'));
+		  $(this).next().next().val(picker.endDate.format('YYYY-MM-DD'));
+	  });
 	});
 
 </script>
@@ -145,13 +143,13 @@ require_once "../../../engine/config.php";
 	<li><a href="#" id="bread_home">Home</a></li>
 	<li><a href="#">Gerenciar Afastamentos</a></li>
 	<li><a href="#">Lista de Dados</a></li>
-	<li class="active">Inserir Afastamentos em Série</li>
+	<li class="active">Lançamento de Férias</li>
 </ol>
 
 <br />
 
 <div class="containter well table-overflow">
-<h1 class="text-center">Inserir Afastamento em Série</h1>
+<h1 class="text-center">Lançamento de Férias</h1>
 <br />
 <br />
 <section class="row"> <!-- Menu de Salvar/Voltar -->
@@ -194,69 +192,48 @@ require_once "../../../engine/config.php";
 	</section> <!-- Selecionar Curso -->
 </section> <!-- Primeira Linha -->
 
-<section class="row"><!-- Segunda Linha -->
-	<section class="col-md-12"> <!-- Selecionar Datas-->
-		<div class="form-group has-feedback has-feedback-right">
-			<input type="hidden" id="dt_inicio_afastamento" value="<?php echo date("Y-m-d");?>">
-			<input type="hidden" id="dt_fim_afastamento" value="<?php echo date("Y-m-d");?>">
-			<label class="control-label">Escolha o intervalo de datas</label>
-			<i class="form-control-feedback glyphicon glyphicon-calendar"></i>
-			<input id="escolhe_data" name="escolhe_data" class="input-mini form-control" type="text">
-		</div>
-	</section><!-- Selecionar Datas-->	
-</section> <!-- Segunda Linha -->
-
-<section class="row"> <!-- Terceira Linha -->
-	<section class="col-md-12">  <!-- Selecionar Ocorrência-->
-	<div class="form-group">
-		<label for="id_ocorrencia">Selecionar a Ocorrência:</label>
-		<select class="form-control" id="id_ocorrencia" style="width: 100%">
-		<option value=""> -- Selecione -- </option>
-		<?php 
-		    $Ocorrencia = new Ocorrencia();
-		    $Ocorrencia = $Ocorrencia->ReadAll();
-		    if(empty($Ocorrencia)){
-		    ?>
-		    	<option>Nenhuma Ocorrência Encontrada</option>
-		    <?php
-          		}
-    			else{
-    			foreach($Ocorrencia as $ocorrenciaRow){
-			    ?>
-		    <option value="<?php echo $ocorrenciaRow['id_ocorrencia']?>"><?php
-		    echo $ocorrenciaRow['codigo_ocorrencia']." - ".$ocorrenciaRow['tipo_ocorrencia']
-		    ?></option>
-		    <?php
-    				}
-    			}
-			    ?>
-		</select>
-	</div>
-	</section> <!-- Selecionar Ocorrência-->
-</section> <!-- Terceira Linha-->
-
-<section class="row"> <!-- Terceira Linha-->
-	<section class="col-md-12"> <!-- Campo de Observação -->
-		<label for="observ_afastamento">Observação:</label>
-		<textarea class="form-control" rows="2" id="observ_afastamento" maxlength="195"></textarea>
-	</section> <!-- Campo de Observação -->
-</section> <!-- Terceira Linha-->
-
-<section class="row"> <!-- Quarta Linha-->
-	<section class="col-md-12"> <!-- Lista de Docentes -->
-		<label for="docentetable">Docentes:</label>
-		<table class="table table-hover" id="docentetable">
-            <thead>
-                <tr>
-                    <th class="text-left">Nome</th>
-                    <th class="text-left">Siape</th>
-                </tr>
-            </thead>
-            <tbody id="id_docente">
-          	</tbody>
-        </table>
-	</section> <!-- Lista de Docentes -->
-</section> <!-- Quarta Linha-->
-
 </div> <!-- Fecha Well -->
 
+<div class="containter well table-overflow">
+
+  <section class="row"> <!-- Primeira Linha-->
+      <section class="col-md-12"> <!-- Lista de Docentes -->
+          <label for="docentetable">Docentes:</label>
+          <table class="table table-hover" id="docentetable">
+              <thead>
+                  <tr>
+                      <th class="text-left">Nome</th>
+                      <th class="text-left">Siape</th>
+                  </tr>
+              </thead>
+              <tbody id="id_docente">
+              </tbody>
+          </table>
+      </section> <!-- Lista de Docentes -->
+  </section> <!-- Primeira Linha-->
+  
+  <section class="row"><!-- Segunda Linha -->
+  
+	<section class="col-md-4"> <!-- Selecionar Datas-->
+		<div class="form-group has-feedback has-feedback-right">
+    		<label class="control-label">Intervalo 1</label>
+    		<i class="form-control-feedback glyphicon glyphicon-calendar"></i>
+    <input name="escolhe_data" class="input-mini form-control escolhe_data" type="text">
+    <input type="hidden" class="dt_inicio_afastamento" value="<?php echo date("Y-m-d");?>">
+    <input type="hidden" class="dt_fim_afastamento" value="<?php echo date("Y-m-d");?>">
+		</div>
+	</section><!-- Selecionar Datas-->
+    
+    <section class="col-md-4"> <!-- Selecionar Datas-->
+		<div class="form-group has-feedback has-feedback-right">
+    		<label class="control-label">Intervalo 2</label>
+    		<i class="form-control-feedback glyphicon glyphicon-calendar"></i>
+    <input name="escolhe_data" class="input-mini form-control escolhe_data" type="text">
+    <input type="hidden" class="dt_inicio_afastamento" value="<?php echo date("Y-m-d");?>">
+    <input type="hidden" class="dt_fim_afastamento" value="<?php echo date("Y-m-d");?>">
+		</div>
+	</section><!-- Selecionar Datas-->
+		
+</section> <!-- Segunda Linha -->
+
+</div>

@@ -59,6 +59,11 @@
 			$('#docenteloader').load('cadastro/afastamento/afastamento.cadastrar.serie.php');
 		});
 		
+		$('#LancamentoFerias').click(function(e) {
+			e.preventDefault();
+			$('#docenteloader').load('cadastro/afastamento/afastamento.cadastrar.ferias.php');
+		});
+		
 		//Collapse Control
 
 		  $('#Data-bar').on('show.bs.collapse', function (e) {
@@ -178,6 +183,11 @@ $Data = getdate ();
         <section class="col-md-12">
 			<button class="btn btn-warning col-md-12" id="InserirAfastamentoSerie"
 				type="button">Inserir Afastamentos em Série</button>
+		</section>
+        
+        <section class="col-md-12">
+			<button class="btn btn-warning col-md-12" id="LancamentoFerias"
+				type="button">Lançamento de Férias</button>
 		</section>
 		
 		<div id="sidebar-pad-scroll"></div>
