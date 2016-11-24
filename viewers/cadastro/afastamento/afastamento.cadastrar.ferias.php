@@ -93,13 +93,15 @@
 	        }
 	    });
 	});
-
-
-	$('input[name="escolhe_data"]').daterangepicker({
+	
+	$("body").on('focus', '.escolhe_data', function() {
+		$(this).daterangepicker
+		({
 	    showDropdowns: true,
 		"timePicker": true,
 		"drops": "up",
 		"linkedCalendars": false,
+		autoUpdateInput: false,
 	    locale: {
 	        "format": "DD/MM/YYYY",
 	        "separator": " - ",
@@ -112,16 +114,15 @@
 	        "daysOfWeek": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
 	        "monthNames": ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ],
 	        "firstDay": 1
-	    },
+	    		},
 	    alwaysShowCalendars: true
-	},
-	function(start, end, label) {
+		  },
+		function(start, end, label) 
+		{
 	  //console.log($('#escolhe_data').data());
 
-	});
-
-	$('body').on('focus',".escolhe_data", function(){
-	  $('.escolhe_data').on('apply.daterangepicker', function(ev, picker) {
+		}).on('apply.daterangepicker', function(ev, picker) {
+		  $(this).val(picker.startDate.format('DD/MM/YYYY') + " - " + picker.endDate.format('DD/MM/YYYY'))	
 		  var datainicio = $(this).next().val(picker.startDate.format('YYYY-MM-DD'));
 		  var datafim = $(this).next().next().val(picker.endDate.format('YYYY-MM-DD'));
 		  var from = datainicio.val().split("-");
@@ -132,12 +133,21 @@
 		  var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
 		  var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());  
 		  var dias = Math.floor((utc2 - utc1) / _MS_PER_DAY)+1;
-		  var btn = $(this).parent().parent().next().children(".btn");
-		  btn.text(dias);
-		  var feriastotal = btn.parent().parent().next().children(".feriastotal");
-		  feriastotal.text(parseInt(feriastotal.text())+parseInt(btn.text()));
+		  var thisdateid = $(this).prev().val();
+		  var feriasid = $(this).parent().parent().parent().children('.feriasid').val();
+		  //alert(thisdateid);
+		  //alert(feriasid);
 		  
-	  });
+		  var btn = $('#btnvalor'+'-'+thisdateid+'-'+feriasid);
+		  btn.val(dias);
+		  btn.prev().text(dias);
+		  var btn1val = parseInt($('#btnvalor-1-'+feriasid).val());
+		  var btn2val = parseInt($('#btnvalor-2-'+feriasid).val());
+		  var btn3val = parseInt($('#btnvalor-3-'+feriasid).val());
+		  var total = $('#valorferiastotal-'+feriasid).val(btn1val+btn2val+btn3val);
+		  total.prev().text(total.val());
+			
+			});
 	});
 
 </script>
@@ -202,71 +212,74 @@ require_once "../../../engine/config.php";
 
 </div> <!-- Fecha Well -->
 
-<div class="containter well">
-
-  <section class="row"> <!-- Primeira Linha-->
-      <section class="col-md-10"> <!-- Lista de Docentes -->
+<section id="id_docente"> <!-- Docentes -->
+  <div class="containter well"> <!-- Well -->
+    <section class="row"> <!-- Primeira Linha-->
+        <section class="col-md-10"> <!-- Nome -->
           <label class="control-label">Nome</label>
           <p>LOREM IPSUM DOLOR SIT AMET</p>
-      </section> <!-- Lista de Docentes -->
-      <section class="col-md-2"> <!-- Lista de Docentes -->
+        </section> <!-- Nome -->
+        <section class="col-md-2"> <!-- Siape -->
           <label class="control-label">Siape</label>
           <p>1524879</p>
-      </section> <!-- Lista de Docentes -->
-  </section> <!-- Primeira Linha-->
-  <hr class="hrferias">
-  <section class="row"><!-- Segunda Linha -->
-   <section class="col-md-11">
-	<section class="col-md-3"> <!-- Selecionar Datas-->
-		<div class="form-group has-feedback has-feedback-right">
-    		<label class="control-label">Intervalo 1</label>
-    		<i class="form-control-feedback glyphicon glyphicon-calendar"></i>
-    <input name="escolhe_data" class="input-mini form-control escolhe_data" type="text">
-    <input type="hidden" class="dt_inicio_afastamento" value="<?php echo date("Y-m-d");?>">
-    <input type="hidden" class="dt_fim_afastamento" value="<?php echo date("Y-m-d");?>">
-		</div>
-
-	</section><!-- Selecionar Datas-->
-    <section class="col-md-1"> <!-- Numero de Dias -->
-      <label class="control-label">Dias</label>
-      <button type="button" class="btn btn-default underbutton" aria-label="Left Align">0
-      </button>
-    </section> <!-- Numero de Dias -->
-    <section class="col-md-3"> <!-- Selecionar Datas-->
-		<div class="form-group has-feedback has-feedback-right">
-    		<label class="control-label">Intervalo 2</label>
-    		<i class="form-control-feedback glyphicon glyphicon-calendar"></i>
-    <input name="escolhe_data" class="input-mini form-control escolhe_data" type="text">
-    <input type="hidden" class="dt_inicio_afastamento" value="<?php echo date("Y-m-d");?>">
-    <input type="hidden" class="dt_fim_afastamento" value="<?php echo date("Y-m-d");?>">
-		</div>
-	</section><!-- Selecionar Datas-->
-    <section class="col-md-1"> <!-- Numero de Dias -->
-      <label class="control-label">Dias</label>
-      <button type="button" class="btn btn-default underbutton" aria-label="Left Align">0
-      </button>
-    </section> <!-- Numero de Dias -->
-    <section class="col-md-3"> <!-- Selecionar Datas-->
-		<div class="form-group has-feedback has-feedback-right">
-    		<label class="control-label">Intervalo 3</label>
-    		<i class="form-control-feedback glyphicon glyphicon-calendar"></i>
-    <input name="escolhe_data" class="input-mini form-control escolhe_data" type="text">
-    <input type="hidden" class="dt_inicio_afastamento" value="<?php echo date("Y-m-d");?>">
-    <input type="hidden" class="dt_fim_afastamento" value="<?php echo date("Y-m-d");?>">
-		</div>
-	</section><!-- Selecionar Datas-->
-	<section class="col-md-1"> <!-- Numero de Dias -->
-      <label class="control-label">Dias</label>
-      <button type="button" class="btn btn-default underbutton" aria-label="Left Align">0
-      </button>
-    </section> <!-- Numero de Dias -->
-   </section>
-   <section class="col-md-1"> <!-- Numero de Dias -->
-      <label class="control-label">Total</label>
-      <button type="button" class="btn btn-default underbutton feriastotal" aria-label="Left Align">0
-      </button>
-      <input type="hidden" class="valorferiastotal">
-   </section> <!-- Numero de Dias -->
-  </section> <!-- Segunda Linha -->
-
-</div>
+        </section> <!-- Siape -->
+        <input type="hidden" class="docenteid" value="1">
+    </section> <!-- Primeira Linha-->
+    <hr class="hrferias"> <!-- Divisor -->
+    <section class="row"><!-- Segunda Linha -->
+     <section class="col-md-11"> <!-- Datas -->
+      <section class="col-md-3"> <!-- Selecionar Datas-->
+        <div class="form-group has-feedback has-feedback-right">
+          <label class="control-label">Intervalo 1</label>
+          <i class="form-control-feedback glyphicon glyphicon-calendar"></i>
+          <input type="hidden" class="whichdateid-1" value="1">
+          <input name="escolhe_data" class="input-mini form-control escolhe_data whichdateid-1" type="text">
+          <input type="hidden" id="dt_inicio_afastamento-1-1">
+          <input type="hidden" id="dt_fim_afastamento-1-1">
+        </div>
+      </section><!-- Selecionar Datas-->
+      <section class="col-md-1"> <!-- Numero de Dias -->
+        <label class="control-label">Dias</label>
+        <button type="button" class="btn btn-default underbutton" aria-label="Left Align">0</button>
+        <input type="hidden" id="btnvalor-1-1" value="0">
+      </section> <!-- Numero de Dias -->
+      <section class="col-md-3"> <!-- Selecionar Datas-->
+        <div class="form-group has-feedback has-feedback-right">
+          <label class="control-label">Intervalo 2</label>
+          <i class="form-control-feedback glyphicon glyphicon-calendar"></i>
+          <input type="hidden" class="whichdateid-2" value="2">
+          <input name="escolhe_data" class="input-mini form-control escolhe_data whichdateid-2" type="text">
+          <input type="hidden" id="dt_inicio_afastamento-2-1">
+          <input type="hidden" id="dt_fim_afastamento-2-1">
+        </div>
+      </section><!-- Selecionar Datas-->
+      <section class="col-md-1"> <!-- Numero de Dias -->
+        <label class="control-label">Dias</label>
+        <button type="button" class="btn btn-default underbutton" aria-label="Left Align">0</button>
+        <input type="hidden" id="btnvalor-2-1" value="0">
+      </section> <!-- Numero de Dias -->
+      <section class="col-md-3"> <!-- Selecionar Datas-->
+        <div class="form-group has-feedback has-feedback-right">
+          <label class="control-label">Intervalo 3</label>
+          <i class="form-control-feedback glyphicon glyphicon-calendar"></i>
+          <input type="hidden" class="whichdateid-3" value="3">
+          <input name="escolhe_data" class="input-mini form-control escolhe_data" type="text">
+          <input type="hidden" id="dt_inicio_afastamento-3-1">
+          <input type="hidden" id="dt_fim_afastamento-3-1">
+        </div>
+      </section><!-- Selecionar Datas-->
+      <section class="col-md-1"> <!-- Numero de Dias -->
+        <label class="control-label">Dias</label>
+        <button type="button" class="btn btn-default underbutton" aria-label="Left Align">0</button>
+        <input type="hidden" id="btnvalor-3-1" value="0">
+      </section> <!-- Numero de Dias -->
+      <input type="hidden" class="feriasid" value="1"> <!-- ID -->
+     </section> <!-- Datas -->
+     <section class="col-md-1"> <!-- Numero de Dias Total -->
+        <label class="control-label">Total</label>
+        <button type="button" class="btn btn-default underbutton" id="btntotal-1" aria-label="Left Align">0</button>
+        <input type="hidden" id="valorferiastotal-1">
+     </section> <!-- Numero de Dias Total -->
+    </section> <!-- Segunda Linha -->
+  </div> <!-- Well -->
+</section> <!-- Docentes -->
