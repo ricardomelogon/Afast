@@ -84,7 +84,7 @@
 	    //alert(selcurso);
 		$.ajax({
 	        type: "POST",
-	        url: "cadastro/afastamento/call_docentes_serie.php",
+	        url: "cadastro/afastamento/call_docentes_ferias.php",
 			data: {selcurso: selcurso},
 	        dataType: "text",
 	        success: function(res){
@@ -97,10 +97,9 @@
 
 	$('input[name="escolhe_data"]').daterangepicker({
 	    showDropdowns: true,
-	    autoApply: true,
-	    autoUpdateInput: true,
 		"timePicker": true,
 		"drops": "up",
+		"linkedCalendars": false,
 	    locale: {
 	        "format": "DD/MM/YYYY",
 	        "separator": " - ",
@@ -120,15 +119,24 @@
 	  //console.log($('#escolhe_data').data());
 
 	});
-	/*
-	$('body').on('focus',".datepicker_recurring_start", function(){
-    $(this).datepicker();
-	});​
-	*/
+
 	$('body').on('focus',".escolhe_data", function(){
 	  $('.escolhe_data').on('apply.daterangepicker', function(ev, picker) {
-		  $(this).next().val(picker.startDate.format('YYYY-MM-DD'));
-		  $(this).next().next().val(picker.endDate.format('YYYY-MM-DD'));
+		  var datainicio = $(this).next().val(picker.startDate.format('YYYY-MM-DD'));
+		  var datafim = $(this).next().next().val(picker.endDate.format('YYYY-MM-DD'));
+		  var from = datainicio.val().split("-");
+		  var a = new Date(from[0], from[1] - 1, from[2]);
+		  var from = datafim.val().split("-");
+		  var b = new Date(from[0], from[1] - 1, from[2]);
+		  var _MS_PER_DAY = 1000 * 60 * 60 * 24;
+		  var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+		  var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());  
+		  var dias = Math.floor((utc2 - utc1) / _MS_PER_DAY)+1;
+		  var btn = $(this).parent().parent().next().children(".btn");
+		  btn.text(dias);
+		  var feriastotal = btn.parent().parent().next().children(".feriastotal");
+		  feriastotal.text(parseInt(feriastotal.text())+parseInt(btn.text()));
+		  
 	  });
 	});
 
@@ -148,7 +156,7 @@ require_once "../../../engine/config.php";
 
 <br />
 
-<div class="containter well table-overflow">
+<div class="containter well">
 <h1 class="text-center">Lançamento de Férias</h1>
 <br />
 <br />
@@ -194,27 +202,22 @@ require_once "../../../engine/config.php";
 
 </div> <!-- Fecha Well -->
 
-<div class="containter well table-overflow">
+<div class="containter well">
 
   <section class="row"> <!-- Primeira Linha-->
-      <section class="col-md-12"> <!-- Lista de Docentes -->
-          <label for="docentetable">Docentes:</label>
-          <table class="table table-hover" id="docentetable">
-              <thead>
-                  <tr>
-                      <th class="text-left">Nome</th>
-                      <th class="text-left">Siape</th>
-                  </tr>
-              </thead>
-              <tbody id="id_docente">
-              </tbody>
-          </table>
+      <section class="col-md-10"> <!-- Lista de Docentes -->
+          <label class="control-label">Nome</label>
+          <p>LOREM IPSUM DOLOR SIT AMET</p>
+      </section> <!-- Lista de Docentes -->
+      <section class="col-md-2"> <!-- Lista de Docentes -->
+          <label class="control-label">Siape</label>
+          <p>1524879</p>
       </section> <!-- Lista de Docentes -->
   </section> <!-- Primeira Linha-->
-  
+  <hr class="hrferias">
   <section class="row"><!-- Segunda Linha -->
-  
-	<section class="col-md-4"> <!-- Selecionar Datas-->
+   <section class="col-md-11">
+	<section class="col-md-3"> <!-- Selecionar Datas-->
 		<div class="form-group has-feedback has-feedback-right">
     		<label class="control-label">Intervalo 1</label>
     		<i class="form-control-feedback glyphicon glyphicon-calendar"></i>
@@ -222,9 +225,14 @@ require_once "../../../engine/config.php";
     <input type="hidden" class="dt_inicio_afastamento" value="<?php echo date("Y-m-d");?>">
     <input type="hidden" class="dt_fim_afastamento" value="<?php echo date("Y-m-d");?>">
 		</div>
+
 	</section><!-- Selecionar Datas-->
-    
-    <section class="col-md-4"> <!-- Selecionar Datas-->
+    <section class="col-md-1"> <!-- Numero de Dias -->
+      <label class="control-label">Dias</label>
+      <button type="button" class="btn btn-default underbutton" aria-label="Left Align">0
+      </button>
+    </section> <!-- Numero de Dias -->
+    <section class="col-md-3"> <!-- Selecionar Datas-->
 		<div class="form-group has-feedback has-feedback-right">
     		<label class="control-label">Intervalo 2</label>
     		<i class="form-control-feedback glyphicon glyphicon-calendar"></i>
@@ -233,7 +241,32 @@ require_once "../../../engine/config.php";
     <input type="hidden" class="dt_fim_afastamento" value="<?php echo date("Y-m-d");?>">
 		</div>
 	</section><!-- Selecionar Datas-->
-		
-</section> <!-- Segunda Linha -->
+    <section class="col-md-1"> <!-- Numero de Dias -->
+      <label class="control-label">Dias</label>
+      <button type="button" class="btn btn-default underbutton" aria-label="Left Align">0
+      </button>
+    </section> <!-- Numero de Dias -->
+    <section class="col-md-3"> <!-- Selecionar Datas-->
+		<div class="form-group has-feedback has-feedback-right">
+    		<label class="control-label">Intervalo 3</label>
+    		<i class="form-control-feedback glyphicon glyphicon-calendar"></i>
+    <input name="escolhe_data" class="input-mini form-control escolhe_data" type="text">
+    <input type="hidden" class="dt_inicio_afastamento" value="<?php echo date("Y-m-d");?>">
+    <input type="hidden" class="dt_fim_afastamento" value="<?php echo date("Y-m-d");?>">
+		</div>
+	</section><!-- Selecionar Datas-->
+	<section class="col-md-1"> <!-- Numero de Dias -->
+      <label class="control-label">Dias</label>
+      <button type="button" class="btn btn-default underbutton" aria-label="Left Align">0
+      </button>
+    </section> <!-- Numero de Dias -->
+   </section>
+   <section class="col-md-1"> <!-- Numero de Dias -->
+      <label class="control-label">Total</label>
+      <button type="button" class="btn btn-default underbutton feriastotal" aria-label="Left Align">0
+      </button>
+      <input type="hidden" class="valorferiastotal">
+   </section> <!-- Numero de Dias -->
+  </section> <!-- Segunda Linha -->
 
 </div>

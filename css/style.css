@@ -323,3 +323,17 @@ div.table-overflow {
 	margin-left:16%;
 	margin-right:16%;
 	}
+	
+/* End Print Page Styles */
+/* Lancamento Ferias Styles */
+
+.hrferias{
+	margin-top:0px;
+	mergin-bottom:0px;
+	border-top: 2px solid #999;
+	}
+.underbutton{
+	display:block;
+	}
+
+/* End Lancamento Ferias Styles */
