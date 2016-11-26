@@ -21,60 +21,60 @@
 		
 		$('#Salvar').click(function(e) {
 			e.preventDefault();
-			var	dt_inicio_afastamento = $('#dt_inicio_afastamento').val();
-			var	dt_fim_afastamento = $('#dt_fim_afastamento').val();
-			var	observ_afastamento = $('#observ_afastamento').val();
-			var id_ocorrencia = $('#id_ocorrencia').val();
-			if ( dt_inicio_afastamento === "" || dt_fim_afastamento === "" || id_ocorrencia === ""){
-				return alert('Todos os campos devem ser preenchidos.');
+			var contagemDiasTotal = 0;
+			$('.feriastotal').each(function(index) {
+				if($(this).val() == 45){}
+				else{contagemDiasTotal++;}
+			});
+			if(contagemDiasTotal != 0){
+			alert("Todo docente deve ter exatamente 45 dias de férias no total.")
 			}
 			else{
-			$(".cada_docente").each(function(index) {
-  				var names = $(this).prev();
-  			var	id_docente = $(this).val();
-			//2 validar os inputs
-			//alert (id_docente);
-			
-			  $.ajax({
-				 url: '../engine/controllers/afastamento.php',
-				 data: {
-					id_afastamento  : null,
-					dt_inicio_afastamento : dt_inicio_afastamento,
-					dt_fim_afastamento : dt_fim_afastamento,
-					observ_afastamento : observ_afastamento,
-					id_ocorrencia : id_ocorrencia,
-					id_docente : id_docente,
-					action: 'create'
-				 },
-				 error: function() {
-					  alert('Erro na conexão com o servidor. Tente novamente em alguns segundos.');
-				 },
-				 success: function(data) {
-					  console.log(data);
-					  if(data === 'true'){
-						  names.css( "background-color", "lightgreen" );
-						  //alert("True");
-					  }
+			  $(".cada_docente").each(function(index) {
+				  count = $(this).children('.segundalinha').children('.col-md-11').children('.feriasid').val();
+				  var	id_docente = $('#docenteid-'+count).val();
+				  for (i = 1; i <= 3; i++) {
+					  var	dt_inicio_afastamento = $('#dt_inicio_afastamento-'+i+'-'+count).val();
+					  var	dt_fim_afastamento = $('#dt_fim_afastamento-'+i+'-'+count).val();
+					  if ( dt_inicio_afastamento === "" || dt_fim_afastamento === ""){}
 					  else{
-						 names.css( "background-color", "lightcoral" );
-						 //alert("False");
-					  }
-				 },
-				 
-				 type: 'POST'
-			  		});	
-				
-				});
-				}
-			
-			
-			//3 transferir os dados dos inputs para o arquivo q ira tratar
-			
-			//4 observar a resposta, e falar pra usuario o que aconteceu
-		});
-
-		
-	});
+						  var closure = $('#docentedata-'+i+'-'+count);
+						  (function(closure){
+							$.ajax({
+								 url: '../engine/controllers/afastamento.php',
+								 data: {
+									id_afastamento  : null,
+									dt_inicio_afastamento : dt_inicio_afastamento,
+									dt_fim_afastamento : dt_fim_afastamento,
+									observ_afastamento : null,
+									id_ocorrencia : 37,
+									id_docente : id_docente,
+									action: 'create'
+								 },
+								 error: function() {
+									  alert('Erro na conexão com o servidor. Tente novamente em alguns segundos.');
+								 },
+								 success: function(data) {
+									  console.log(data);
+									  if(data === 'true'){
+										  closure.css( "background-color", "lightgreen" );
+										  //alert("True");
+									  }
+									  else{
+										 closure.css( "background-color", "lightcoral" );
+										 //alert("False");
+									  }
+								 },
+								 
+								 type: 'POST'
+							}); //Ajax
+						  })(closure); //Ajax Closure
+					  } // Else
+				  } //Cada Afastamento - For	
+			  }); // Cada Docente
+			}
+		}); //Salvar
+	}); // Document Ready
 </script>
 
 <script type="text/javascript">
@@ -88,8 +88,8 @@
 			data: {selcurso: selcurso},
 	        dataType: "text",
 	        success: function(res){
-	            $("#id_docente").empty();
-	            $("#id_docente").append(res);
+	            $("#docentelista").empty();
+	            $("#docentelista").append(res);
 	        }
 	    });
 	});
@@ -212,74 +212,6 @@ require_once "../../../engine/config.php";
 
 </div> <!-- Fecha Well -->
 
-<section id="id_docente"> <!-- Docentes -->
-  <div class="containter well"> <!-- Well -->
-    <section class="row"> <!-- Primeira Linha-->
-        <section class="col-md-10"> <!-- Nome -->
-          <label class="control-label">Nome</label>
-          <p>LOREM IPSUM DOLOR SIT AMET</p>
-        </section> <!-- Nome -->
-        <section class="col-md-2"> <!-- Siape -->
-          <label class="control-label">Siape</label>
-          <p>1524879</p>
-        </section> <!-- Siape -->
-        <input type="hidden" class="docenteid" value="1">
-    </section> <!-- Primeira Linha-->
-    <hr class="hrferias"> <!-- Divisor -->
-    <section class="row"><!-- Segunda Linha -->
-     <section class="col-md-11"> <!-- Datas -->
-      <section class="col-md-3"> <!-- Selecionar Datas-->
-        <div class="form-group has-feedback has-feedback-right">
-          <label class="control-label">Intervalo 1</label>
-          <i class="form-control-feedback glyphicon glyphicon-calendar"></i>
-          <input type="hidden" class="whichdateid-1" value="1">
-          <input name="escolhe_data" class="input-mini form-control escolhe_data whichdateid-1" type="text">
-          <input type="hidden" id="dt_inicio_afastamento-1-1">
-          <input type="hidden" id="dt_fim_afastamento-1-1">
-        </div>
-      </section><!-- Selecionar Datas-->
-      <section class="col-md-1"> <!-- Numero de Dias -->
-        <label class="control-label">Dias</label>
-        <button type="button" class="btn btn-default underbutton" aria-label="Left Align">0</button>
-        <input type="hidden" id="btnvalor-1-1" value="0">
-      </section> <!-- Numero de Dias -->
-      <section class="col-md-3"> <!-- Selecionar Datas-->
-        <div class="form-group has-feedback has-feedback-right">
-          <label class="control-label">Intervalo 2</label>
-          <i class="form-control-feedback glyphicon glyphicon-calendar"></i>
-          <input type="hidden" class="whichdateid-2" value="2">
-          <input name="escolhe_data" class="input-mini form-control escolhe_data whichdateid-2" type="text">
-          <input type="hidden" id="dt_inicio_afastamento-2-1">
-          <input type="hidden" id="dt_fim_afastamento-2-1">
-        </div>
-      </section><!-- Selecionar Datas-->
-      <section class="col-md-1"> <!-- Numero de Dias -->
-        <label class="control-label">Dias</label>
-        <button type="button" class="btn btn-default underbutton" aria-label="Left Align">0</button>
-        <input type="hidden" id="btnvalor-2-1" value="0">
-      </section> <!-- Numero de Dias -->
-      <section class="col-md-3"> <!-- Selecionar Datas-->
-        <div class="form-group has-feedback has-feedback-right">
-          <label class="control-label">Intervalo 3</label>
-          <i class="form-control-feedback glyphicon glyphicon-calendar"></i>
-          <input type="hidden" class="whichdateid-3" value="3">
-          <input name="escolhe_data" class="input-mini form-control escolhe_data" type="text">
-          <input type="hidden" id="dt_inicio_afastamento-3-1">
-          <input type="hidden" id="dt_fim_afastamento-3-1">
-        </div>
-      </section><!-- Selecionar Datas-->
-      <section class="col-md-1"> <!-- Numero de Dias -->
-        <label class="control-label">Dias</label>
-        <button type="button" class="btn btn-default underbutton" aria-label="Left Align">0</button>
-        <input type="hidden" id="btnvalor-3-1" value="0">
-      </section> <!-- Numero de Dias -->
-      <input type="hidden" class="feriasid" value="1"> <!-- ID -->
-     </section> <!-- Datas -->
-     <section class="col-md-1"> <!-- Numero de Dias Total -->
-        <label class="control-label">Total</label>
-        <button type="button" class="btn btn-default underbutton" id="btntotal-1" aria-label="Left Align">0</button>
-        <input type="hidden" id="valorferiastotal-1">
-     </section> <!-- Numero de Dias Total -->
-    </section> <!-- Segunda Linha -->
-  </div> <!-- Well -->
+<section id="docentelista"> <!-- Docentes -->
+
 </section> <!-- Docentes -->
