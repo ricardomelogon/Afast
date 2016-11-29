@@ -6,6 +6,11 @@ $MesAnoAfastamento = $_POST['filtra_mes'];
 $MesAnoAfastamento = explode ( '/', $MesAnoAfastamento);
 $MesAfastamento = $MesAnoAfastamento[0];
 $AnoAfastamento = $MesAnoAfastamento[1];
+$StartDiaAfastamento = 1;
+$EndDiaAfastamento = cal_days_in_month(CAL_GREGORIAN,$MesAfastamento,$AnoAfastamento);
+
+$StartData = $AnoAfastamento.'-'.$MesAfastamento.'-'.$StartDiaAfastamento;
+$EndData = $AnoAfastamento.'-'.$MesAfastamento.'-'.$EndDiaAfastamento;
 
 ?>
 <script type="text/javascript">
@@ -96,7 +101,7 @@ $(function(){
 <div id="id_afastamento" hidden="true"></div>
 <?php
 $Afastamento = new Afastamento();
-$Afastamento = $Afastamento->ReadAllDocenteMes($IdDocente, $MesAfastamento, $AnoAfastamento);
+$Afastamento = $Afastamento->ReadAllOverlaps($IdDocente, $StartData, $EndData);
 // var_dump($Item);
 if (empty ( $Afastamento )) {
 	?>

@@ -1,6 +1,6 @@
 
 <link rel="stylesheet" type="text/css" href="../css/select2.css" />
-<link rel="stylesheet" type="text/css" href="../css/bootsrap-datepicker3.css" />
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-datepicker3.css" />
 <script type="text/javascript" src="../js/moment.min.js"></script>
 <script type="text/javascript" src="../js/jquery.cascade-select.js"></script>
 <script type="text/javascript" src="../js/select2.js"></script>

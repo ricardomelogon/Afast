@@ -23,7 +23,7 @@
 			e.preventDefault();
 			var contagemDiasTotal = 0;
 			$('.feriastotal').each(function(index) {
-				if($(this).val() == 45){}
+				if($(this).val() == 45 || $(this).val() == 0){}
 				else{contagemDiasTotal++;}
 			});
 			if(contagemDiasTotal != 0){
