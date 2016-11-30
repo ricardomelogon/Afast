@@ -40,45 +40,61 @@
 			var	observ_afastamento = $('#observ_afastamento').val();
 			var id_ocorrencia = $('#id_ocorrencia').val();
 			var	id_docente = $('#id_docente').val();
-			//console.log($('#dt_inicio_afastamento').val());
-			//console.log($('#dt_fim_afastamento').val());
-			//console.log($('#observ_afastamento').val());
-			//console.log($('#id_ocorrencia').val());
-			//console.log($('#id_docente').val());
-
-			//2 validar os inputs
 			if ( dt_inicio_afastamento === "" || dt_fim_afastamento === "" || id_ocorrencia === ""  || id_docente === ""){
 				return alert('Todos os campos devem ser preenchidos.');
 			}
 			else{
-			  $.ajax({
-				 url: '../engine/controllers/afastamento.php',
-				 data: {
-					id_afastamento  : id_afastamento,
-					dt_inicio_afastamento : dt_inicio_afastamento,
-					dt_fim_afastamento : dt_fim_afastamento,
-					observ_afastamento : observ_afastamento,
-					id_ocorrencia : id_ocorrencia,
-					id_docente : id_docente,
-					action: 'create'
-				 },
-				 error: function() {
-					  alert('Erro na conexão com o servidor. Tente novamente em alguns segundos.');
-				 },
-				 success: function(data) {
-					  console.log(data);
-					  if(data === 'true'){
-						  alert('Afastamento alterado com sucesso');
-						  $('#docenteloader').load('../viewers/cadastro/afastamento/afastamento.listar.php');
-					  }
-					  else{
-						  alert('Erro ao inserir dados.');	
-					  }
-				 },
-				 
-				 type: 'POST'
-			  		});	
-				}
+				(function(dt_inicio_afastamento, dt_fim_afastamento, id_docente, observ_afastamento, id_ocorrencia){
+					$.ajax({
+						url: '../engine/controllers/afastamento.php',
+						type: 'POST',
+						data: {
+							id_afastamento  : null,
+							dt_inicio_afastamento : dt_inicio_afastamento,
+							dt_fim_afastamento : dt_fim_afastamento,
+							observ_afastamento : observ_afastamento,
+							id_ocorrencia : id_ocorrencia,
+							id_docente : id_docente,
+							action: 'overlap'
+						},
+						success: function(data) {
+							if (data == "true"){proceedOverlap = true;}
+							else{
+								var proceedOverlap = confirm("O afastamento coincide com afastamentos já existentes. Deseja continuar?");
+							} 
+							if (proceedOverlap) {
+								(function(dt_inicio_afastamento, dt_fim_afastamento, id_docente, observ_afastamento, id_ocorrencia){  
+									$.ajax({
+										url: '../engine/controllers/afastamento.php',
+										data: {
+											id_afastamento  : null,
+											dt_inicio_afastamento : dt_inicio_afastamento,
+											dt_fim_afastamento : dt_fim_afastamento,
+											observ_afastamento : observ_afastamento,
+											id_ocorrencia : id_ocorrencia,
+											id_docente : id_docente,
+											action: 'create'
+										},
+										error: function() {
+											alert('Erro na conexão com o servidor. Tente novamente em alguns segundos.');
+										},
+										success: function(data) {
+											if(data === 'true'){
+											  alert('Afastamento inserido com sucesso');
+											  $('#docenteloader').load('../viewers/cadastro/afastamento/afastamento.listar.php');
+											}
+											else{
+											  alert('Erro ao inserir dados.');  
+											}
+										}, //Sucesso Ajax2
+										type: 'POST'
+									}); //Ajax2
+								})(dt_inicio_afastamento, dt_fim_afastamento, id_docente, observ_afastamento, id_ocorrencia); //Ajax2 Função
+							} //If sobreposição
+						} //Sucesso Ajax1
+					}); //Ajax1
+				})(dt_inicio_afastamento, dt_fim_afastamento, id_docente, observ_afastamento, id_ocorrencia); //Ajax1 Função
+			}
 		});
 
 		$('#Excluir').click(function(e) {
@@ -170,7 +186,10 @@
 <script type="text/javascript">
 	$('#escolhe_data').daterangepicker({
 	    "showDropdowns": false,
+		"timePicker": true,
 	    "autoApply": true,
+		autoUpdateInput: false,
+		"linkedCalendars": false,
 	    "locale": {
 	        "format": "DD/MM/YYYY",
 	        "separator": " - ",
@@ -190,6 +209,7 @@
 	  //console.log($('#escolhe_data').data());
 	});
 	$('#escolhe_data').on('apply.daterangepicker', function(ev, picker) {
+		$(this).val(picker.startDate.format('DD/MM/YYYY') + " - " + picker.endDate.format('DD/MM/YYYY'));
 		$('#dt_inicio_afastamento').val(picker.startDate.format('YYYY-MM-DD'));
 		$('#dt_fim_afastamento').val(picker.endDate.format('YYYY-MM-DD'));
 	});

@@ -8,7 +8,7 @@ $Docentesize = sizeof($Docente);
 foreach ( $Docente as $docenteRow ){
   if (is_null ( $docenteRow ['dt_fim_exercicio'] )) {
 	echo '<tr class="nome_docente_serie">';
-	echo '<td class="text-left">'.$docenteRow['nome_docente'].'</td>';
+	echo '<td class="text-left nomeSerie">'.$docenteRow['nome_docente'].'</td>';
 	echo '<td class="text-left">'.$docenteRow['siape_docente'].'</td>';
 	echo '</tr>';
 	echo '<input type="hidden" class="cada_docente" value="'.$docenteRow['id_docente'].'">';

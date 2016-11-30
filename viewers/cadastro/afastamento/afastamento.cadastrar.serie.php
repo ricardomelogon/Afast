@@ -24,61 +24,74 @@
     	});
 		
 		$('#Salvar').click(function(e) {
-			e.preventDefault();
-			var	dt_inicio_afastamento = $('#dt_inicio_afastamento').val();
-			var	dt_fim_afastamento = $('#dt_fim_afastamento').val();
-			var	observ_afastamento = $('#observ_afastamento').val();
-			var id_ocorrencia = $('#id_ocorrencia').val();
-			if ( dt_inicio_afastamento === "" || dt_fim_afastamento === "" || id_ocorrencia === ""){
-				return alert('Todos os campos devem ser preenchidos.');
-			}
-			else{
-			$(".cada_docente").each(function(index) {
-  				var names = $(this).prev();
-  			var	id_docente = $(this).val();
-			//2 validar os inputs
-			//alert (id_docente);
-			
-			  $.ajax({
-				 url: '../engine/controllers/afastamento.php',
-				 data: {
-					id_afastamento  : null,
-					dt_inicio_afastamento : dt_inicio_afastamento,
-					dt_fim_afastamento : dt_fim_afastamento,
-					observ_afastamento : observ_afastamento,
-					id_ocorrencia : id_ocorrencia,
-					id_docente : id_docente,
-					action: 'create'
-				 },
-				 error: function() {
-					  alert('Erro na conexão com o servidor. Tente novamente em alguns segundos.');
-				 },
-				 success: function(data) {
-					  console.log(data);
-					  if(data === 'true'){
-						  names.css( "background-color", "lightgreen" );
-						  //alert("True");
-					  }
-					  else{
-						 names.css( "background-color", "lightcoral" );
-						 //alert("False");
-					  }
-				 },
-				 
-				 type: 'POST'
-			  		});	
-				
-				});
-				}
-			
-			
-			//3 transferir os dados dos inputs para o arquivo q ira tratar
-			
-			//4 observar a resposta, e falar pra usuario o que aconteceu
-		});
+          e.preventDefault();
+          var dt_inicio_afastamento = $('#dt_inicio_afastamento').val();
+          var dt_fim_afastamento = $('#dt_fim_afastamento').val();
+          var observ_afastamento = $('#observ_afastamento').val();
+          var id_ocorrencia = $('#id_ocorrencia').val();
+          if ( dt_inicio_afastamento === "" || dt_fim_afastamento === "" || id_ocorrencia === ""){
+            return alert('Todos os campos devem ser preenchidos.');
+          }
+          else{
+            $(".cada_docente").each(function(index) {
+              var names = $(this).prev();
+              var id_docente = $(this).val();
+              var nomeSerie = names.children('.nomeSerie').text();
+              (function(names, nomeSerie, dt_inicio_afastamento, dt_fim_afastamento, id_docente, observ_afastamento, id_ocorrencia){
+                $.ajax({
+                  url: '../engine/controllers/afastamento.php',
+                  type: 'POST',
+                  data: {
+                    id_afastamento  : null,
+                    dt_inicio_afastamento : dt_inicio_afastamento,
+                    dt_fim_afastamento : dt_fim_afastamento,
+                    observ_afastamento : observ_afastamento,
+                    id_ocorrencia : id_ocorrencia,
+                    id_docente : id_docente,
+                    action: 'overlap'
+                  },
+                  success: function(data) {
+                    if (data == "true"){proceedOverlap = true;}
+                    else{
+                    var proceedOverlap = confirm("O afastamento do docente "+nomeSerie+" coincide com afastamentos já existentes. Deseja continuar?");
+                    } 
+                    if (proceedOverlap) {
+                      (function(names, dt_inicio_afastamento, dt_fim_afastamento, id_docente, observ_afastamento, id_ocorrencia){  
+                        $.ajax({
+                          url: '../engine/controllers/afastamento.php',
+                          data: {
+                            id_afastamento  : null,
+                            dt_inicio_afastamento : dt_inicio_afastamento,
+                            dt_fim_afastamento : dt_fim_afastamento,
+                            observ_afastamento : observ_afastamento,
+                            id_ocorrencia : id_ocorrencia,
+                            id_docente : id_docente,
+                            action: 'create'
+                          },
+                          error: function() {
+                            alert('Erro na conexão com o servidor. Tente novamente em alguns segundos.');
+                          },
+                          success: function(data) {
+                            //console.log(data);
+                            if(data === 'true'){
+                              names.css( "background-color", "lightgreen" );
+                            }
+                            else{
+                             names.css( "background-color", "lightcoral" );
+                            }
+                          }, //Sucesso Ajax2
+                          type: 'POST'
+                        }); //Ajax2
+                      })(names, dt_inicio_afastamento, dt_fim_afastamento, id_docente, observ_afastamento, id_ocorrencia); //Ajax2 Função
+                    } //If sobreposição
+                  } //Sucesso Ajax1
+                }); //Ajax1
+              })(names, nomeSerie, dt_inicio_afastamento, dt_fim_afastamento, id_docente, observ_afastamento, id_ocorrencia); //Ajax1 Função
+            }); // Cada Docente
+          } //Else dados colocados
+        }); // Salvar
 
-		
-	});
+	}); //Document Ready
 </script>
 
 <script type="text/javascript">

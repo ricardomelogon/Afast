@@ -20,44 +20,27 @@ $Item->SetValues ( $id_afastamento, $dt_inicio_afastamento, $dt_fim_afastamento,
 // parte4
 switch ($action) {
 	case 'create' :
-		
-		$res = $Item->ReadAllOverlaps($id_docente, $dt_inicio_afastamento, $dt_fim_afastamento);
-		//var_dump($res);
-		if(empty($res))
-		{
-			//var_dump($res);
+
 		  $res = $Item->Create ();
 		  if ($res === NULL) {
 			  $res = "true";
 		  } else {
 			  $res = "false";
 		  }
-		}
-		else
-		{
-			$res = "false";
-		}
+
 		  echo $res;
 		
 		break;
 	
 	case 'update' :
-		$res = $Item->ReadAllOverlapsUpdate($id_docente, $dt_inicio_afastamento, $dt_fim_afastamento);
-		//var_dump($res);
-		if(empty($res))
-		{
-			//var_dump($res);
+
 		  $res = $Item->Update ();
 		  if ($res === NULL) {
 			  $res = 'true';
 		  } else {
 			  $res = 'false';
 		  }
-		}
-		else
-		{
-			$res = "false";
-		}
+
 		echo $res;
 		
 		break;
