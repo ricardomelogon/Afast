@@ -88,6 +88,21 @@ switch ($action) {
 		  echo $res;
 		
 		break;
+	
+	case 'overlapupdate' :
+		
+		$res = $Item->ReadAllOverlapsUpdate($id_docente, $dt_inicio_afastamento, $dt_fim_afastamento);
+		if(empty($res))
+		{
+			$res = "true";
+		}
+		else
+		{
+			$res = "false";
+		}
+		  echo $res;
+		
+		break;
 
 }
 ?>

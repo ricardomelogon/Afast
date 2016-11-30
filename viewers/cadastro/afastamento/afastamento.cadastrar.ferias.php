@@ -19,61 +19,83 @@
 			$('#afast_sistema').click();
     	});
 		
-		$('#Salvar').click(function(e) {
-			e.preventDefault();
-			var contagemDiasTotal = 0;
-			$('.feriastotal').each(function(index) {
-				if($(this).val() == 45 || $(this).val() == 0){}
-				else{contagemDiasTotal++;}
-			});
-			if(contagemDiasTotal != 0){
-			alert("Todo docente deve ter exatamente 45 dias de férias no total.")
-			}
-			else{
-			  $(".cada_docente").each(function(index) {
-				  count = $(this).children('.segundalinha').children('.col-md-11').children('.feriasid').val();
-				  var	id_docente = $('#docenteid-'+count).val();
-				  for (i = 1; i <= 3; i++) {
-					  var	dt_inicio_afastamento = $('#dt_inicio_afastamento-'+i+'-'+count).val();
-					  var	dt_fim_afastamento = $('#dt_fim_afastamento-'+i+'-'+count).val();
-					  if ( dt_inicio_afastamento === "" || dt_fim_afastamento === ""){}
-					  else{
-						  var closure = $('#docentedata-'+i+'-'+count);
-						  (function(closure){
-							$.ajax({
-								 url: '../engine/controllers/afastamento.php',
-								 data: {
-									id_afastamento  : null,
-									dt_inicio_afastamento : dt_inicio_afastamento,
-									dt_fim_afastamento : dt_fim_afastamento,
-									observ_afastamento : null,
-									id_ocorrencia : 37,
-									id_docente : id_docente,
-									action: 'create'
-								 },
-								 error: function() {
-									  alert('Erro na conexão com o servidor. Tente novamente em alguns segundos.');
-								 },
-								 success: function(data) {
-									  console.log(data);
-									  if(data === 'true'){
-										  closure.css( "background-color", "lightgreen" );
-										  //alert("True");
-									  }
-									  else{
-										 closure.css( "background-color", "lightcoral" );
-										 //alert("False");
-									  }
-								 },
-								 
-								 type: 'POST'
-							}); //Ajax
-						  })(closure); //Ajax Closure
-					  } // Else
-				  } //Cada Afastamento - For	
-			  }); // Cada Docente
-			}
-		}); //Salvar
+    $('#Salvar').click(function(e) {
+      e.preventDefault();
+      var contagemDiasTotal = 0;
+      $('.feriastotal').each(function(index) {
+        if($(this).val() == 45 || $(this).val() == 0){}
+        else{contagemDiasTotal++;}
+      });
+      if(contagemDiasTotal != 0){
+      alert("Todo docente deve ter exatamente 45 dias de férias no total.")
+      }
+      else{
+        $(".cada_docente").each(function(index) {
+          count = $(this).children('.segundalinha').children('.col-md-11').children('.feriasid').val();
+          var id_docente = $('#docenteid-'+count).val();
+          for (i = 1; i <= 3; i++) {
+            var dt_inicio_afastamento = $('#dt_inicio_afastamento-'+i+'-'+count).val();
+            var dt_fim_afastamento = $('#dt_fim_afastamento-'+i+'-'+count).val();
+            if ( dt_inicio_afastamento === "" || dt_fim_afastamento === ""){}
+            else{
+              var closure = $('#docentedata-'+i+'-'+count);
+              var docenteNome = $('#DocenteNome-'+count).text();
+              (function(closure, docenteNome, i, dt_inicio_afastamento, dt_fim_afastamento, id_docente){
+                $.ajax({
+                  url: '../engine/controllers/afastamento.php',
+                  type: 'POST',
+                  data: {
+                    id_afastamento  : null,
+                    dt_inicio_afastamento : dt_inicio_afastamento,
+                    dt_fim_afastamento : dt_fim_afastamento,
+                    observ_afastamento : null,
+                    id_ocorrencia : 37,
+                    id_docente : id_docente,
+                    action: 'overlap'
+                  },
+                  success: function(data) {
+                    if (data == "true"){proceedOverlap = true;}
+                    else{
+                    var proceedOverlap = confirm("O Intervalo "+i+" de férias do docente "+docenteNome+" coincide com afastamentos já existentes. Deseja continuar?");
+                    } 
+                    if (proceedOverlap) {
+                      (function(dt_inicio_afastamento, dt_fim_afastamento, id_docente){  
+                        $.ajax({
+                          url: '../engine/controllers/afastamento.php',
+                          data: {
+                            id_afastamento  : null,
+                            dt_inicio_afastamento : dt_inicio_afastamento,
+                            dt_fim_afastamento : dt_fim_afastamento,
+                            observ_afastamento : null,
+                            id_ocorrencia : 37,
+                            id_docente : id_docente,
+                            action: 'create'
+                          },
+                          error: function() {
+                            alert('Erro na conexão com o servidor. Tente novamente em alguns segundos.');
+                          },
+                          success: function(data) {
+                            //console.log(data);
+                            if(data === 'true'){
+                            closure.css( "background-color", "lightgreen" );
+                            }
+                            else{
+                            closure.css( "background-color", "lightcoral" );
+                            }
+                          }, //Sucesso Ajax2
+                          type: 'POST'
+                        }); //Ajax2
+                      })(dt_inicio_afastamento, dt_fim_afastamento, id_docente); //Ajax2 Função
+                    } //If sobreposição
+                  } //Sucesso Ajax1
+                }); //Ajax1
+              })(closure, docenteNome, i, dt_inicio_afastamento, dt_fim_afastamento, id_docente); //Ajax1 Função
+            } // Else não está vazio
+          } //Cada Afastamento - For  
+        }); // Cada Docente
+      } //Else Teste 45
+    }); //Salvar
+		
 	}); // Document Ready
 </script>
 

@@ -13,7 +13,7 @@ echo  '<div class="containter well cada_docente"> <!-- Well -->';
 echo    '<section class="row primeiralinha"> <!-- Primeira Linha-->';
 echo        '<section class="col-md-10"> <!-- Nome -->';
 echo          '<label class="control-label">Nome</label>';
-echo          '<p>'.$docenteRow['nome_docente'].'</p>';
+echo          '<p id="DocenteNome-'.$count.'">'.$docenteRow['nome_docente'].'</p>';
 echo        '</section> <!-- Nome -->';
 echo        '<section class="col-md-2"> <!-- Siape -->';
 echo          '<label class="control-label">Siape</label>';
