@@ -20,7 +20,7 @@ function fixfirstdate($string, $newmes, $newano)
 	$result = $ano."-".$mes."-".$dia;
 	return($result);
 	
-}
+}//Trunca data inicial para o mês corrente
 
 function fixlastdate($string, $newmes, $newano)
 {
@@ -31,7 +31,7 @@ function fixlastdate($string, $newmes, $newano)
 	if($flag){$dia = date('t',mktime(0, 0, 0, $mes, 1, $ano));}
 	$result = $ano."-".$mes."-".$dia;
 	return($result);
-}
+}//Trunca data final para o mês corrente
 
 function diasefetivos($start,$end,$mes,$ano)
 {
@@ -59,7 +59,7 @@ function diasefetivos($start,$end,$mes,$ano)
 	$result = date('d',$thismonthend) - date('d',$thismonthstart);
 	return($result) +1;
 	
-}
+}//Ajusta a quantidade de dias efetivos baseado na data de entrada e saida do exercício do docente
 
 function fixbystart($afastdate, $startdate)
 {
@@ -72,7 +72,8 @@ function fixbystart($afastdate, $startdate)
 		$newafastdate = $newstartdate;
 	}
 	return date('Y-m-d',$newafastdate); 
-}
+}//Ajusta o início do afastamento baseado na data de entrada em exercício do docente
+
 function fixbyend($afastdate, $enddate)
 {
 	if(!($enddate == NULL))
@@ -92,6 +93,41 @@ function fixbyend($afastdate, $enddate)
 		return $afastdate;
 	}   
 
+}//Ajusta o final do afastamento baseado na data de saida do exercício do docente
+
+function getdaylist($start,$end,$mes,$ano)
+{
+	$daysmonth = date('t',mktime(0, 0, 0, $mes, 1, $ano));
+	
+	$thismonthstart = mktime(0, 0, 0, $mes, 1, $ano);
+	$thismonthend = mktime(0, 0, 0, $mes, $daysmonth, $ano);
+	
+	list($anoinit, $mesinit, $diainit)=explode("-", $start);
+	$startdate = mktime(0, 0, 0, $mesinit, $diainit, $anoinit);
+	
+	if(!($end == NULL))
+	{
+		list($anofim, $mesfim, $diafim)=explode("-", $end);
+		$enddate = mktime(0, 0, 0, $mesfim, $diafim, $anofim);
+	}
+	else 
+	{
+		$enddate = mktime(0, 0, 0, $mes, $daysmonth, $ano);
+	}
+	
+	if($startdate > $thismonthstart) {$thismonthstart = $startdate;}
+	if($enddate < $thismonthend) {$thismonthend = $enddate;}
+	
+	$firstday = date('d',$thismonthstart);
+	$lastday = date('d',$thismonthend);
+	
+	$result = array();
+	for($i = $firstday; $i <= $lastday; $i++)
+	{
+		array_push($result,(int)$i);
+	}
+	return($result);
+	
 }
 
 function getquantdays($inicio, $fim)
@@ -100,6 +136,25 @@ function getquantdays($inicio, $fim)
 	list($anofim, $mesfim, $diafim)=explode("-", $fim);
 	$result = $diafim - ($diainicio -1);
 	return($result);
+}
+
+function geteffectivedays($inicio, $fim, &$Listadias)
+{
+	list($anoinicio, $mesinicio, $diainicio)=explode("-", $inicio);
+	list($anofim, $mesfim, $diafim)=explode("-", $fim);
+	$result = 0;
+	$stop = sizeof($Listadias);
+	for($i = 0; $i < 31; $i++)
+	{
+		if(isset($Listadias[$i])){
+		  if($Listadias[$i] >= $diainicio && $Listadias[$i] <= $diafim)
+		  {
+			  $result++;
+			  unset($Listadias[$i]);
+		  }
+		}
+	}
+	return $result;
 }
 
 function getlistday($inicio, $fim)
@@ -199,13 +254,13 @@ date_default_timezone_set( 'America/Sao_Paulo' );
 			  fixlastdate($FixAfastamentoRow['dt_fim_afastamento'],$mes,$ano);
 	  }
 	  //var_dump($Afastamento);
-	}
+	}//Pega todos os afastamentos e acerta eles para o mês atual.
 	foreach ($Docente as $DocenteRow)
 	{
 		$Quantidade = 0;
-		$DiasEfetivos = 
-		diasefetivos($DocenteRow['dt_inicio_exercicio'],$DocenteRow['dt_fim_exercicio'],$mes,$ano);
-		$Obervs = array();
+		$DiasEfetivos = diasefetivos($DocenteRow['dt_inicio_exercicio'],$DocenteRow['dt_fim_exercicio'],$mes,$ano);
+		$Listadias = getdaylist($DocenteRow['dt_inicio_exercicio'],$DocenteRow['dt_fim_exercicio'],$mes,$ano);
+		$Observs = array();
 		$Obsindex = 0;
 		?>
         <section class="row">
@@ -227,39 +282,27 @@ date_default_timezone_set( 'America/Sao_Paulo' );
                   </tr>
                 <?php
 					//var_dump($DocenteRow);
-					foreach($Afastamento as $indice => &$AfastamentoRow)
-					{	
-						if($AfastamentoRow['siape_docente'] == $DocenteRow['siape_docente'])
-						{
-							//var_dump($AfastamentoRow);
-		$AfastamentoRow['dt_inicio_afastamento'] =
-		fixbystart($AfastamentoRow['dt_inicio_afastamento'],$DocenteRow['dt_inicio_exercicio']);
-		$AfastamentoRow['dt_fim_afastamento'] =
-		fixbyend($AfastamentoRow['dt_fim_afastamento'],$DocenteRow['dt_fim_exercicio']);
+					foreach($Afastamento as $indice => &$AfastamentoRow){	
+						if($AfastamentoRow['siape_docente'] == $DocenteRow['siape_docente']){
+							$AfastamentoRow['dt_inicio_afastamento'] = fixbystart($AfastamentoRow['dt_inicio_afastamento'],$DocenteRow['dt_inicio_exercicio']);
+							$AfastamentoRow['dt_fim_afastamento'] = fixbyend($AfastamentoRow['dt_fim_afastamento'],$DocenteRow['dt_fim_exercicio']);
 				?>
                   <tr class="simpleborder">
                   	<td class="simpleborder"> <?php echo $AfastamentoRow['codigo_ocorrencia'] ?> </td>
                     <td class="simpleborder"> <?php echo $AfastamentoRow['tipo_ocorrencia']?></td>
-                    <td class="simpleborder"> 
-				<?php 
-		echo $quantdays = 
-		getquantdays($AfastamentoRow['dt_inicio_afastamento'],$AfastamentoRow['dt_fim_afastamento']);
-					$Quantidade = $Quantidade + $quantdays;
-					if(empty($AfastamentoRow['observ_afastamento'])){}
-					else 
-					{
-		$Obervs[$Obsindex] = 
-		array($AfastamentoRow['codigo_ocorrencia'], $AfastamentoRow['observ_afastamento']);
-		$Obsindex++; 
-					}
-					unset($Afastamento[$indice]);
-				?>
+                    <td class="simpleborder"> <?php echo $quantdays = getquantdays($AfastamentoRow['dt_inicio_afastamento'],$AfastamentoRow['dt_fim_afastamento']);
+													$Daystoadd = geteffectivedays($AfastamentoRow['dt_inicio_afastamento'],$AfastamentoRow['dt_fim_afastamento'],$Listadias);
+													//var_dump($Listadias);
+													$Quantidade = $Quantidade + $Daystoadd;
+													if(empty($AfastamentoRow['observ_afastamento'])){}
+													else{
+														$Observs [$Obsindex] = array($AfastamentoRow['codigo_ocorrencia'], $AfastamentoRow['observ_afastamento']);
+														$Obsindex++; 
+													}
+													unset($Afastamento[$indice]);
+											   ?>
                     </td>
-                    <td class="simpleborder">
-				 <?php
-		echo getlistday($AfastamentoRow['dt_inicio_afastamento'],$AfastamentoRow['dt_fim_afastamento']);
-                 ?>
-                    </td>
+                    <td class="simpleborder"> <?php	echo getlistday($AfastamentoRow['dt_inicio_afastamento'],$AfastamentoRow['dt_fim_afastamento']); ?> </td>
                   </tr>
 				 <?php
 						}
@@ -268,18 +311,18 @@ date_default_timezone_set( 'America/Sao_Paulo' );
                 </table>
                 <?php
 					$DiasEfetivos = $DiasEfetivos - $Quantidade;
-					if(!empty($Obervs))
+					if(!empty($Observs ))
 					{
-					  if (count ( $Obervs ) == count ( $Obervs, COUNT_RECURSIVE )) 
+					  if (count ( $Observs ) == count ( $Observs , COUNT_RECURSIVE )) 
 					  {
-						  $Obervs = array ($Obervs);
+						  $Observs = array ($Observs );
 					  }
 				?>
                 <p class="paragmargin">
                 	<strong>Observações:</strong>
                     <br>
 					<?php
-					foreach($Obervs as $ObservRow)
+					foreach($Observs as $ObservRow)
                     {
                         echo $ObservRow['0']."\t".$ObservRow['1'];
 					?>
