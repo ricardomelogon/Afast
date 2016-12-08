@@ -1,7 +1,8 @@
 <?php
 require_once('../../../engine/config.php');
 $SelCurso = $_POST ['selcurso'];
-//var_dump($SelCurso);
+$SelAno = $_POST['selano'];
+
 $Docente = new Docente();
 $Docente = $Docente->ReadAllCurso($SelCurso);
 $Docentesize = sizeof($Docente);

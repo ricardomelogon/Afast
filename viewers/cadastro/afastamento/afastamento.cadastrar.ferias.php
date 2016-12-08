@@ -103,17 +103,20 @@
 	 	
 	$("#sel_curso").change(function(){
 	    var selcurso = $(this).val();
-	    //alert(selcurso);
-		$.ajax({
-	        type: "POST",
-	        url: "cadastro/afastamento/call_docentes_ferias.php",
-			data: {selcurso: selcurso},
-	        dataType: "text",
-	        success: function(res){
-	            $("#docentelista").empty();
-	            $("#docentelista").append(res);
-	        }
-	    });
+		//alert(selcurso);
+		var selano = $('#filtra_ano').val();
+	    if(selcurso != ""){
+		  $.ajax({
+			  type: "POST",
+			  url: "cadastro/afastamento/call_docentes_ferias.php",
+			  data: {selcurso: selcurso, selano: selano},
+			  dataType: "text",
+			  success: function(res){
+				  $("#docentelista").empty();
+				  $("#docentelista").append(res);
+			  }
+		  });
+		}
 	});
 	
 	$("body").on('focus', '.escolhe_data', function() {
@@ -171,6 +174,17 @@
 			
 			});
 	});
+	
+	$("#filtra_ano").datepicker( {
+    format: " yyyy",
+    viewMode: "years", 
+    minViewMode: "years",
+	});
+	
+	$("#filtra_ano").change(function(){
+		$("#sel_curso").trigger('change');	
+	});
+	
 
 </script>
 
@@ -206,7 +220,7 @@ require_once "../../../engine/config.php";
 </section> <!-- Menu de Salvar/Voltar -->
 <br />
 <section class="row"><!-- Primeira Linha -->
-	<section class="col-md-12">  <!-- Selecionar Curso -->
+	<section class="col-md-8">  <!-- Selecionar Curso -->
 		<div class="form-group">
 		  <label for="sel_curso">Selecionar Curso:</label>
 		  <select class="form-control" id="sel_curso">
@@ -230,6 +244,14 @@ require_once "../../../engine/config.php";
 		  </select>
 		</div>
 	</section> <!-- Selecionar Curso -->
+    <section class="col-md-4"> <!-- Selecionar Ano-->
+		<div class="form-group has-feedback has-feedback-right">
+			<label for="startdate" class="control-label">Escolha o ano:</label>
+            <i class="form-control-feedback glyphicon glyphicon-calendar"></i>
+			<input id="filtra_ano" name="filtra_ano" class="date-picker input-mini form-control filtra_ano"></input> 
+		</div>
+	</section><!-- Selecionar Ano-->
+    
 </section> <!-- Primeira Linha -->
 
 </div> <!-- Fecha Well -->

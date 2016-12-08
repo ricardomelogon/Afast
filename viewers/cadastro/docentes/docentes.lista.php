@@ -70,7 +70,7 @@
 			  if ($(this).is(e.target)) 
 			  {
 				$('.sidebar-content').css({'width':'72%', 'margin-left':'18vw'});
-				$('.sidebar-btn').css({'margin-left':'24vw'}); 
+				$('.sidebar-btn').css({'left':'27em'}); 
 			  }   
 		  });
 		  
@@ -78,7 +78,7 @@
 			  if ($(this).is(e.target)) 
 			  {
 				$('.sidebar-content').css({'width':'99%', 'margin-left':'-8vw'});
-				$('.sidebar-btn').css({'margin-left':'-3vw'}); 
+				$('.sidebar-btn').css({'left':'0em'}); 
 			  } 
 		  });
 	});

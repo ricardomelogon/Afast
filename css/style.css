@@ -185,10 +185,10 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 
 /* Sidebar Style Begin */
 .sidebar-pad {
-	padding-top: 13vh;
-	padding-bottom: 13vh;
-	margin-left: -3vw;
-	width: 30%;
+	padding-top: 6em;
+	padding-bottom: 6em;
+	left: -1.5em;
+	width: 30em;
 	height: 100%;
 	overflow-y: scroll;
 	z-index: 9;
@@ -196,9 +196,9 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 }
 
 .sidebar-btn {
-	padding-bottom: 20vw;
-	padding-top: 20vw;
-	margin-left: 24vw;
+	padding-bottom: 49vh;
+	padding-top: 49vh;
+	left: 27em;
 	width: 20px;
 	max-width: 20px;
 	height: 100%;
