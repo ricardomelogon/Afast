@@ -9,6 +9,7 @@ require_once "classes/afastamento.php";
 require_once "classes/curso.php";
 require_once "classes/docente.php";
 require_once "classes/docente_exercicio.php";
+require_once "classes/ferias.php";
 
 function ExibeData($data) {
 	$dataCerta = explode ( '-', $data );
