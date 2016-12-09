@@ -80,7 +80,7 @@ echo      '<input type="hidden" class="feriasid" value="'.$count.'"> <!-- ID -->
 echo     '</section> <!-- Datas -->';
 echo     '<section class="col-md-1"> <!-- Numero de Dias Total -->';
 echo        '<label class="control-label">Total</label>';
-echo        '<button type="button" class="btn btn-default underbutton" id="btntotal-'.$count.'" aria-label="Left Align">'.$dt = (int)$d1+(int)$d2+(int)$d3.'</button>';
+echo        '<button type="button" class="btn btn-default underbutton" id="btntotal-'.$count.'" aria-label="Left Align">'.($dt = ((int)$d1+(int)$d2+(int)$d3)).'</button>';
 echo        '<input type="hidden" class="feriastotal" id="valorferiastotal-'.$count.'" value="'.$dt.'">';
 echo     '</section> <!-- Numero de Dias Total -->';
 echo    '</section> <!-- Segunda Linha -->';

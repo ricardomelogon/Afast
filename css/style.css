@@ -108,7 +108,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 }
 
 .breadcrumb {
-	padding-top: 4.4vw;
+	padding-top: 4.4em;
 }
 
 .EditarItem:hover {
@@ -188,7 +188,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 	padding-top: 6em;
 	padding-bottom: 6em;
 	left: -1.5em;
-	width: 30em;
+	width: 22em;
 	height: 100%;
 	overflow-y: scroll;
 	z-index: 9;
@@ -198,7 +198,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 .sidebar-btn {
 	padding-bottom: 49vh;
 	padding-top: 49vh;
-	left: 27em;
+	left: 19em;
 	width: 20px;
 	max-width: 20px;
 	height: 100%;
@@ -207,7 +207,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 }
 
 .sidebar-content {
-	margin-left: 18vw;
+	margin-left: 12em;
 	width: 72%;
 	z-index: 8;
 }

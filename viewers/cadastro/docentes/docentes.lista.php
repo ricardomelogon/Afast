@@ -69,15 +69,15 @@
 		  $('#Data-bar').on('show.bs.collapse', function (e) {
 			  if ($(this).is(e.target)) 
 			  {
-				$('.sidebar-content').css({'width':'72%', 'margin-left':'18vw'});
-				$('.sidebar-btn').css({'left':'27em'}); 
+				$('.sidebar-content').css({'width':'72%', 'margin-left':'12em'});
+				$('.sidebar-btn').css({'left':'19em'}); 
 			  }   
 		  });
 		  
 		  $('#Data-bar').on('hidden.bs.collapse', function (e) {
 			  if ($(this).is(e.target)) 
 			  {
-				$('.sidebar-content').css({'width':'99%', 'margin-left':'-8vw'});
+				$('.sidebar-content').css({'width':'99%', 'margin-left':'0em'});
 				$('.sidebar-btn').css({'left':'0em'}); 
 			  } 
 		  });
