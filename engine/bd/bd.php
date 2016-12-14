@@ -1,19 +1,17 @@
 <?php
 
-/*
- *
- * // acesso remoto
- * define("DB_HOSTI",""); // host
- * define("DB_USERNAMEI",""); // username
- * define("DB_PASSWORDI",""); // password
- * define("DB_DATABASEI",""); // db name
- */
 
-// acesso local
 define ( "DB_HOSTI", "localhost" ); // host
 define ( "DB_USERNAMEI", "root" ); // username
 define ( "DB_PASSWORDI", "" ); // password
 define ( "DB_DATABASEI", "ictafast" ); // db name
+
+/*
+define ( "DB_HOSTI", "localhost" ); // host
+define ( "DB_USERNAMEI", "ictafast" ); // username
+define ( "DB_PASSWORDI", "ehZDaauAQPSYfqp6" ); // password
+define ( "DB_DATABASEI", "ictafast" ); // db name
+*/
 class DB {
 	private $dbi;
 	private $query;

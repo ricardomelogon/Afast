@@ -424,6 +424,48 @@ class Afastamento {
 		
 	}
 	
+	public function ReadAllOcorrenciaFerias($id) {
+		$sql = "
+		SELECT
+			t1.id_afastamento,
+			t1.dt_inicio_afastamento,
+			t1.dt_fim_afastamento,
+			t1.id_docente,
+			t2.nome_docente
+		FROM
+			afastamento AS t1
+		INNER JOIN docente AS t2 ON t1.id_docente = t2.id_docente
+			INNER JOIN exercicio AS t3 ON t2.id_docente = t3.id_docente
+				LEFT JOIN ferias AS t4 ON t1.id_afastamento = t4.id_afastamento 
+		WHERE
+			t1.id_ocorrencia = 37
+		AND
+			t3.id_curso = '$id'
+		AND
+			t4.id_afastamento IS NULL
+		ORDER BY t2.nome_docente
+			";
+	
+		$DB = new DB ();
+		$DB->open ();
+		$Data = $DB->fetchData ( $sql );
+		$realData;
+		if ($Data == NULL) {
+			$realData = $Data;
+		} else {
+				
+			foreach ( $Data as $itemData ) {
+				if (is_bool ( $itemData ))
+					continue;
+					else {
+						$realData [] = $itemData;
+					}
+			}
+		}
+		$DB->close ();
+		return $realData;
+	}
+	
 	
 	/*
 	 * --------------------------------------------------

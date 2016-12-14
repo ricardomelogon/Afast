@@ -58,5 +58,18 @@ switch ($action) {
 		echo $res;
 		
 		break;
+		
+	case 'createsingle' :
+		
+		$res = $Item->CreateSingle();
+		if ($res === NULL) {
+			$res = "true";
+		} else {
+			$res = "false";
+		}
+		
+		echo $res;
+		
+		break;
 }
 ?>

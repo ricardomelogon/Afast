@@ -188,7 +188,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 	padding-top: 6em;
 	padding-bottom: 6em;
 	left: -1.5em;
-	width: 22em;
+	width: 25em;
 	height: 100%;
 	overflow-y: scroll;
 	z-index: 9;
@@ -198,7 +198,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 .sidebar-btn {
 	padding-bottom: 49vh;
 	padding-top: 49vh;
-	left: 19em;
+	left: 22em;
 	width: 20px;
 	max-width: 20px;
 	height: 100%;
@@ -337,3 +337,15 @@ div.table-overflow {
 	}
 
 /* End Lancamento Ferias Styles */
+/* Editar Férias */
+
+.editarFeriasGlyph{
+	top:8px;
+	right:8px;
+	}
+	
+.editarFeriasTd{
+	width:10em;
+	}
+
+/* End Editar Férias*/

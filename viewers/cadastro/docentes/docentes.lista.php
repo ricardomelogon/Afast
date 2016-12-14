@@ -64,13 +64,18 @@
 			$('#docenteloader').load('cadastro/afastamento/afastamento.cadastrar.ferias.php');
 		});
 		
+		$('#AnoFerias').click(function(e) {
+			e.preventDefault();
+			$('#docenteloader').load('cadastro/afastamento/afastamento.editar.anoferias.php');
+		});
+		
 		//Collapse Control
 
 		  $('#Data-bar').on('show.bs.collapse', function (e) {
 			  if ($(this).is(e.target)) 
 			  {
 				$('.sidebar-content').css({'width':'72%', 'margin-left':'12em'});
-				$('.sidebar-btn').css({'left':'19em'}); 
+				$('.sidebar-btn').css({'left':'22em'}); 
 			  }   
 		  });
 		  
@@ -188,6 +193,11 @@ $Data = getdate ();
         <section class="col-md-12">
 			<button class="btn btn-warning col-md-12" id="LancamentoFerias"
 				type="button">Lançamento de Férias</button>
+		</section>
+        
+        <section class="col-md-12">
+			<button class="btn btn-warning col-md-12" id="AnoFerias"
+				type="button">Editar Férias Marcadas</button>
 		</section>
 		
 		<div id="sidebar-pad-scroll"></div>

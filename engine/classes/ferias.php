@@ -298,6 +298,30 @@ class Ferias {
 		$DB->close ();
 		return $realData;
 	}
+	
+	public function CreateSingle() {
+		$sql = "	
+				INSERT INTO ferias 
+				(
+					
+					id_ferias,
+					ano_ferias,
+					id_afastamento
+				)  
+				VALUES 
+				(
+					'$this->id_ferias',
+					'$this->ano_ferias',
+					'$this->id_afastamento'
+				);
+			";
+		
+		$DB = new DB ();
+		$DB->open ();
+		$result = $DB->query ( $sql );
+		$DB->close ();
+		return $result;
+	}
 
 	/*
 	 * --------------------------------------------------
