@@ -84,6 +84,7 @@ main {
 
 #loader {
 	position:relative;
+	white-space:nowrap;
 	}
 
 .to-functions {

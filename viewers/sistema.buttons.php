@@ -3,17 +3,21 @@
 	$(document).ready(function(e) {
 
 	  $('#gerenciar_docentes').click(function(e) {
-		$('#loader').animate({left: "100vw"},600, function(){
+		$('#loader').css('overflow','hidden');
+		$('#loader').animate({left: "-100vw"},600, function(){
 			$('#loader').empty();
 			$('#loader').css("left", "0vw");
+			$('#loader').css('overflow','auto');
 			$('#loader').load('../viewers/docentes/docentes.lista.php');
 		});
 	  });
 	  
 	  $('#gerar_relatorios').click(function(e) {
-		$('#loader').animate({left: "-100vw"},600, function(){
+		$('#loader').css('overflow','hidden');
+		$('#loader').animate({left: "100vw"},600, function(){
 			$('#loader').empty();
 			$('#loader').css("left", "0vw");
+			$('#loader').css('overflow','auto');
 			$('#loader').load('../viewers/relatorio/relatorio.lista.php');
 		});
 	  });
