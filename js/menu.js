@@ -1,21 +1,21 @@
 $(document).ready(function(e) {
 	
 	if ($('#loader').is(':empty')){
-		$('#loader').load('../viewers/gerenciamento/sistema.buttons.php');
+		$('#loader').load('../viewers/sistema.buttons.php');
 	}
 	
 	$('#gerenciar_admin').click(function(e) {
 		e.preventDefault();
 		//alert("admin");
 		$('#printloader').empty();
-		$('#loader').load('../viewers/gerenciamento/administrador/administrador.lista.php');
+		$('#loader').load('../viewers/administrador/administrador.lista.php');
     });	
 	
 	$('#afast_sistema').click(function(e) {
 		e.preventDefault();
     	//alert("home");
 		$('#printloader').empty();
-		$('#loader').load('../viewers/gerenciamento/sistema.buttons.php');
+		$('#loader').load('../viewers/sistema.buttons.php');
     });
 	
 	

@@ -6,7 +6,7 @@ html, body {
 main {
 	min-height: 100%;
 	margin:0 auto;
-	padding-bottom: 20vh;
+	/*padding-bottom: 20vh;*/
 	margin-top: inherit;
 	vertical-align: center;
 }
@@ -82,6 +82,10 @@ main {
 	background-color: white;
 }
 
+#loader {
+	position:relative;
+	}
+
 .to-functions {
 	min-height: 300px;
 	text-align: center;
@@ -94,6 +98,61 @@ main {
 	color: #FFFFFF;
 	margin-top: 10vw;
 }
+
+.sectionbtn {
+	height: 100vh;
+	text-align: center;
+	font-size: 3vw;
+	width:48%;
+	-webkit-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
+	background-color:#E2F6C2;
+	-webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+	}
+	
+.sectionbtn:hover {
+	background-color:#66921F;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+	cursor:pointer;
+	}
+	
+.sectionbtn:hover a{
+	color:#7EB1DC;
+	}
+
+.sectiondivider{
+	width:4%;
+	}
+
+.sectionstepglyph{
+	top: 46vh;
+	color: white;
+	}
+
+.sectionstepdiv{
+	background-color: #ABD567;
+	height: 100vh;
+	}
+
+
+.sectionglyph {
+	color: #ABD567;
+	font-size: 4em;
+	top: 0.5em;
+	}
+	
+.sectionicondiv{
+	height:45vh;
+	}
 
 a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 	background: #8BC633;
@@ -146,8 +205,58 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 }
 
 .datepicker-center {
-	padding-left: 4vw;
+	padding-left: 2em;
 }
+
+/* Ocorrencia Button Style*/
+
+.btn-ocorrencia { 
+  color: #ffffff; 
+  background-color: #7C4DBA; 
+  border-color: #643E96; 
+} 
+ 
+.btn-ocorrencia:hover, 
+.btn-ocorrencia:focus, 
+.btn-ocorrencia:active, 
+.btn-ocorrencia.active, 
+.open .dropdown-toggle.btn-ocorrencia { 
+  color: #ffffff; 
+  background-color: #49247A; 
+  border-color: #643E96; 
+} 
+ 
+.btn-ocorrencia:active, 
+.btn-ocorrencia.active, 
+.open .dropdown-toggle.btn-ocorrencia { 
+  background-image: none; 
+} 
+ 
+.btn-ocorrencia.disabled, 
+.btn-ocorrencia[disabled], 
+fieldset[disabled] .btn-ocorrencia, 
+.btn-ocorrencia.disabled:hover, 
+.btn-ocorrencia[disabled]:hover, 
+fieldset[disabled] .btn-ocorrencia:hover, 
+.btn-ocorrencia.disabled:focus, 
+.btn-ocorrencia[disabled]:focus, 
+fieldset[disabled] .btn-ocorrencia:focus, 
+.btn-ocorrencia.disabled:active, 
+.btn-ocorrencia[disabled]:active, 
+fieldset[disabled] .btn-ocorrencia:active, 
+.btn-ocorrencia.disabled.active, 
+.btn-ocorrencia[disabled].active, 
+fieldset[disabled] .btn-ocorrencia.active { 
+  background-color: #7C4DBA; 
+  border-color: #643E96; 
+} 
+ 
+.btn-ocorrencia .badge { 
+  color: #7C4DBA; 
+  background-color: #ffffff; 
+}
+
+/* End Ocorrencia Button Style*/
 
 /* Filter Table Style Begin*/
 .filterrow {
