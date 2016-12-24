@@ -3,34 +3,28 @@
 	$(document).ready(function(e) {
 
 	  $('#gerenciar_docentes').click(function(e) {
-		$('#loader').css('overflow','hidden');
-		$('#loader').animate({left: "-100vw"},600, function(){
-			$('#loader').empty();
-			$('#loader').css("left", "0vw");
-			$('#loader').css('overflow','auto');
+		$('.sectionbtn').fadeOut(600, function(){
 			$('#loader').load('../viewers/docentes/docentes.lista.php');
 		});
 	  });
 	  
 	  $('#gerar_relatorios').click(function(e) {
-		$('#loader').css('overflow','hidden');
-		$('#loader').animate({left: "100vw"},600, function(){
-			$('#loader').empty();
-			$('#loader').css("left", "0vw");
-			$('#loader').css('overflow','auto');
-			$('#loader').load('../viewers/relatorio/relatorio.lista.php');
+		$('.sectionbtn').fadeOut(600, function(){
+			$('#loader').load('../viewers/relatorio/relatorio.lista.php?v=1.15');
 		});
 	  });
 	  	
     });
 </script>
-
+<div style="display:flex;justify-content:center;align-items:center;">Text Content</div>
 <?php
 require_once "../engine/config.php";
 ?>
 	<div class="col-md-5 sectionbtn" id="gerenciar_docentes">
     	<div class="col-md-1 sectionstepdiv">
-        	<span class="glyphicon glyphicon-chevron-left sectionstepglyph"></span>
+			<div style="display:flex;justify-content:center;align-items:center;">
+            	<span class="glyphicon glyphicon-record sectionstepglyph"></span>
+			</div>
         </div>
         <div class="col-md-11">
         	<div class="col-md-12 sectionicondiv">
@@ -52,6 +46,8 @@ require_once "../engine/config.php";
             </div>
         </div> 
         <div class="col-md-1 sectionstepdiv">
-        	<span class="glyphicon glyphicon-chevron-right sectionstepglyph"></span>
+        	<div style="display:flex;justify-content:center;align-items:center;">
+        		<span class="glyphicon glyphicon-record sectionstepglyph"></span>
+            </div>    
         </div>   
 	</div>

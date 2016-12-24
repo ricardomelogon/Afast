@@ -1,10 +1,10 @@
 
-<link rel="stylesheet" type="text/css" href="../css/select2.css" />
-<link rel="stylesheet" type="text/css" href="../css/daterangepicker.css" />
-<script type="text/javascript" src="../js/moment.min.js"></script>
-<script type="text/javascript" src="../js/jquery.cascade-select.js"></script>
-<script type="text/javascript" src="../js/select2.js"></script>
-<script type="text/javascript" src="../js/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/select2.css?v=1.15" />
+<link rel="stylesheet" type="text/css" href="../css/daterangepicker.css?v=1.15" />
+<script type="text/javascript" src="../js/moment.min.js?v=1.15"></script>
+<script type="text/javascript" src="../js/jquery.cascade-select.js?v=1.15"></script>
+<script type="text/javascript" src="../js/select2.js?v=1.15"></script>
+<script type="text/javascript" src="../js/daterangepicker.js?v=1.15"></script>
 <script>
 	$(document).ready(function(e) {
 		$('#Excluir').hide();
@@ -106,34 +106,53 @@
 			if(confirm("Alterações em um Afastamento modificam todo o histórico relacionado a ele.\nNão é recomendado alterações a não ser que você tenha certeza de que são necessárias.\nDeseja continuar?"))
 			{
 				var	id_afastamento = $('#id_afastamento').val();
+				var id_ocorrencia = $('#id_ocorrencia').val();
+				if(id_ocorrencia == 37){
+					$.ajax({
+						url: '../engine/controllers/ferias.php',
+						data: {
+						  id_afastamento  : id_afastamento,
+						  dt_inicio_afastamento : null,
+						  dt_fim_afastamento : null,
+						  observ_afastamento : null,
+						  id_ocorrencia : null,
+						  id_docente : null,
+						  action: 'delete'
+				  		},
+				  		error: function() {
+					  		alert('Erro na conexão com o servidor. Tente novamente em alguns segundos.');
+				  		},
+				  		success: function(data) {},
+					  	type: 'POST'
+				  	});	
+				}
 				$.ajax({
 					url: '../engine/controllers/afastamento.php',
 					data: {
-					id_afastamento  : id_afastamento,
-					dt_inicio_afastamento : null,
-					dt_fim_afastamento : null,
-					observ_afastamento : null,
-					id_ocorrencia : null,
-					id_docente : null,
-					action: 'delete'
-				},
-				error: function() {
-					alert('Erro na conexão com o servidor. Tente novamente em alguns segundos.');
-				},
-				success: function(data) {
-					console.log(data);
-					if(data === 'true'){
-						alert('Afastamento excluído com sucesso');
-						$('#docenteloader').load('../viewers/afastamento/afastamento.listar.php');
-					}
-					else{
-						alert('Erro ao conectar com banco de dados. Aguarde e tente novamente em alguns instantes.');	
-					}
+						id_afastamento  : id_afastamento,
+						dt_inicio_afastamento : null,
+						dt_fim_afastamento : null,
+						observ_afastamento : null,
+						id_ocorrencia : null,
+						id_docente : null,
+						action: 'delete'
+					},
+					error: function() {
+						alert('Erro na conexão com o servidor. Tente novamente em alguns segundos.');
+					},
+					success: function(data) {
+						//console.log(data);
+						if(data === 'true'){
+							alert('Afastamento excluído com sucesso');
+							$('#docenteloader').load('../viewers/afastamento/afastamento.listar.php');
+						}
+						else{
+							alert('Erro ao conectar com banco de dados. Aguarde e tente novamente em alguns instantes.');	
+						}
 					},
 					type: 'POST'
 				});
 			}	
-
 		});
 
 	});
@@ -314,6 +333,7 @@ require_once "../../engine/config.php";
 	<section class="col-md-8">  <!-- Selecionar Ocorrência-->
 	<div class="form-group idocorr">
 		<label for="id_ocorrencia">Ocorrência:</label>
+        <section>
 		<select class="form-control" id="id_ocorrencia" style="width: 100%" disabled="disabled">
 		<option></option>
 		<?php 
@@ -335,6 +355,7 @@ require_once "../../engine/config.php";
     			}
 			    ?>
 		</select>
+        </section>
 	</div>
 	</section> <!-- Selecionar Ocorrência-->
 </section> <!-- Segunda Linha-->

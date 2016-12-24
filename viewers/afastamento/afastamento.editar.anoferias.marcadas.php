@@ -15,19 +15,34 @@
 		
 		$("#sel_curso").change(function(){
 			var selcurso = $(this).val();
-			//alert(selcurso);
+			$('#id_curso').val(selcurso);
 			$.ajax({
 				type: "POST",
-				url: "afastamento/call_editar_ferias.php",
+				url: "afastamento/call_docentes.php",
 				data: {selcurso: selcurso},
 				dataType: "text",
 				success: function(res){
 					$("#id_docente").empty();
 					$("#id_docente").append(res);
-					var s = document.createElement("script");
-					s.type = "text/javascript";
-					s.src = "../js/viewers/afastamento/afastamento.editar.anoferias.js";
-					$("#id_docente").append(s);
+				}
+			});
+		});
+		
+
+		$('#LoadedContainer').on('change', '#id_docente', function(){
+			var id_docente = $(this).val();
+			var id_curso = $('#id_curso').val();
+			$.ajax({
+				type: "POST",
+				url: "afastamento/call_editar_ferias_marcadas.php?v=1.15",
+				data: {
+					id_curso: id_curso,
+					id_docente: id_docente
+				},
+				dataType: "text",
+				success: function(res){
+					$("#id_docente_body").empty();
+					$("#id_docente_body").append(res);
 				}
 			});
 		});
@@ -57,11 +72,11 @@ require_once "../../engine/config.php";
 	<li class="active">Editar Férias Marcadas</li>
 </ol>
 
-<div class="containter well table-overflow">
+<div class="containter well table-overflow" id="LoadedContainer">
 	<h2 class="text-center">Editar Férias Marcadas</h2>
     <br>
     <section class="row"><!-- Primeira Linha -->
-	<section class="col-md-12">  <!-- Selecionar Curso -->
+	<section class="col-md-4">  <!-- Selecionar Curso -->
 		<div class="form-group">
 		  <label for="sel_curso">Selecionar Curso:</label>
 		  <select class="form-control" id="sel_curso">
@@ -85,6 +100,14 @@ require_once "../../engine/config.php";
 		  </select>
 		</div>
 	</section> <!-- Selecionar Curso -->
+    <section class="col-md-8"> <!-- Selecionar Docente-->	
+		<div class="form-group">
+		  <label for="id_docente">Selecionar Docente:</label>
+		  <select class="form-control" id="id_docente">
+		  <option class="sel_curso" value=""> -- Selecione um Curso -- </option>
+		  </select>
+		</div>
+	</section><!-- Selecionar Docente-->	
 </section> <!-- Primeira Linha -->
 <section class="row"> <!-- Segunda Linha-->
 	<section class="col-md-12"> <!-- Lista de Docentes -->
@@ -99,12 +122,14 @@ require_once "../../engine/config.php";
                     <th class="text-left">Salvar</th>
                 </tr>
             </thead>
-            <tbody id="id_docente">
+            <tbody id="id_docente_body">
           	</tbody>
         </table>
 	</section> <!-- Lista de Docentes -->
 </section> <!-- Segunda Linha-->
 </div>
+<input id="id_curso" type="hidden">
+<section id="ExtraScripts"></section>
 <div class="bottom-pad"></div>
 
 

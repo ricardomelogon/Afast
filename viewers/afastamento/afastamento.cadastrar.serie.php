@@ -1,10 +1,10 @@
 
-<link rel="stylesheet" type="text/css" href="../css/select2.css" />
-<link rel="stylesheet" type="text/css" href="../css/daterangepicker.css" />
-<script type="text/javascript" src="../js/moment.min.js"></script>
-<script type="text/javascript" src="../js/jquery.cascade-select.js"></script>
-<script type="text/javascript" src="../js/select2.js"></script>
-<script type="text/javascript" src="../js/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/select2.css?v=1.15" />
+<link rel="stylesheet" type="text/css" href="../css/daterangepicker.css?v=1.15" />
+<script type="text/javascript" src="../js/moment.min.js?v=1.15"></script>
+<script type="text/javascript" src="../js/jquery.cascade-select.js?v=1.15"></script>
+<script type="text/javascript" src="../js/select2.js?v=1.15"></script>
+<script type="text/javascript" src="../js/daterangepicker.js?v=1.15"></script>
 <script>
 	$(document).ready(function(e) {
 		//$('#dt_inicio_afastamento').val(moment().format('L'));
@@ -223,6 +223,7 @@ require_once "../../engine/config.php";
 	<section class="col-md-12">  <!-- Selecionar Ocorrência-->
 	<div class="form-group">
 		<label for="id_ocorrencia">Selecionar a Ocorrência:</label>
+        <section>
 		<select class="form-control" id="id_ocorrencia" style="width: 100%">
 		<option value=""> -- Selecione -- </option>
 		<?php 
@@ -244,6 +245,7 @@ require_once "../../engine/config.php";
     			}
 			    ?>
 		</select>
+        </section>
 	</div>
 	</section> <!-- Selecionar Ocorrência-->
 </section> <!-- Terceira Linha-->
@@ -272,4 +274,4 @@ require_once "../../engine/config.php";
 </section> <!-- Quarta Linha-->
 
 </div> <!-- Fecha Well -->
-
+<div class="bottom-pad"></div>

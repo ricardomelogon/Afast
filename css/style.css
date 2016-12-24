@@ -109,20 +109,20 @@ main {
 	-moz-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
 	box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
 	background-color:#E2F6C2;
-	-webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+	-webkit-transition: background-color 0.5s ease;
+    -moz-transition: background-color 0.5s ease;
+    -o-transition: background-color 0.5s ease;
+    -ms-transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease;
 	}
 	
 .sectionbtn:hover {
 	background-color:#66921F;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+    -webkit-transition: background-color 0.5s ease;
+    -moz-transition: background-color 0.5s ease;
+    -o-transition: background-color 0.5s ease;
+    -ms-transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease;
 	cursor:pointer;
 	}
 	
@@ -153,6 +153,10 @@ main {
 	
 .sectionicondiv{
 	height:45vh;
+	}
+
+.well {
+	min-width:80em !important;
 	}
 
 a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
@@ -295,6 +299,7 @@ fieldset[disabled] .btn-ocorrencia.active {
 
 /* Sidebar Style Begin */
 .sidebar-pad {
+	background-color: white;
 	padding-top: 6em;
 	padding-bottom: 6em;
 	left: -1.5em;
@@ -314,9 +319,13 @@ fieldset[disabled] .btn-ocorrencia.active {
 	height: 100%;
 	position: fixed;
 	z-index: 10;
+	-webkit-box-shadow: 5px 0px 10px -3px rgba(0,0,0,0.75);
+	-moz-box-shadow: 5px 0px 10px -3px rgba(0,0,0,0.75);
+	box-shadow: 5px 0px 10px -3px rgba(0,0,0,0.75);
 }
 
 .sidebar-content {
+	padding-left: 5em;
 	margin-left: 12em;
 	width: 72%;
 	z-index: 8;
@@ -326,6 +335,7 @@ fieldset[disabled] .btn-ocorrencia.active {
 	padding: 20px;
 	padding-bottom: 120vh;
 }
+
 /* Sidebar Style End */
 .table-overflow {
     max-width: 180vh;
@@ -457,5 +467,78 @@ div.table-overflow {
 .editarFeriasTd{
 	width:10em;
 	}
+	
+.feriasnoborder{
+	border-radius: 0px;
+	display:inline-block;
+	}
+
+.feriasrightborder{
+	border-radius: 0px 4px 4px 0px;
+	border-color: #ccc;
+	display:inline-block;
+	}
+.feriasleftborder{
+	border-radius: 4px 0px 0px 4px;
+	display:inline-block;
+	}
+
+
+.textcenter{
+	text-align:center;
+	padding-right:0px;
+	padding-left: 5px;
+	}
+	
+.nopadleft{
+	padding-left:0px;
+	}
+
+.nopadright{
+	padding-right:0px !important;
+	}
+	
+.totalalign{
+	text-align:center;
+	}
+
+.totalbtnwidth{
+	width:100%;
+	}
+
 
 /* End Editar Férias*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

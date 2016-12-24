@@ -177,7 +177,7 @@ class Ferias {
 	public function Delete() {
 		$sql = "
 				DELETE FROM ferias
-				WHERE id_ferias = '$this->id_ferias';
+				WHERE id_afastamento = '$this->id_afastamento';
 			";
 		$DB = new DB ();
 		

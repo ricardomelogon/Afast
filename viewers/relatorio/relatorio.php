@@ -182,7 +182,7 @@ date_default_timezone_set( 'America/Sao_Paulo' );
 <head>
     <meta charset="utf-8">
     <title>ICT AFAST - Relatório Mensal</title>
-    <link rel="stylesheet" media="print" href="../css/print.css">
+    <link rel="stylesheet" media="print" href="../css/print.css?v=1.15">
 </head>
 
 <body>
@@ -255,6 +255,7 @@ date_default_timezone_set( 'America/Sao_Paulo' );
 	  }
 	  //var_dump($Afastamento);
 	}//Pega todos os afastamentos e acerta eles para o mês atual.
+	$CountBreak = 0;
 	foreach ($Docente as $DocenteRow)
 	{
 		$Quantidade = 0;
@@ -351,6 +352,7 @@ date_default_timezone_set( 'America/Sao_Paulo' );
         </section>
         </section>
 		<?php
+		
 	}
 ?>
 

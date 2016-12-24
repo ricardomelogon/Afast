@@ -1,10 +1,10 @@
 
-<link rel="stylesheet" type="text/css" href="../css/select2.css" />
-<link rel="stylesheet" type="text/css" href="../css/daterangepicker.css" />
-<script type="text/javascript" src="../js/moment.min.js"></script>
-<script type="text/javascript" src="../js/jquery.cascade-select.js"></script>
-<script type="text/javascript" src="../js/select2.js"></script>
-<script type="text/javascript" src="../js/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/select2.css?v=1.15" />
+<link rel="stylesheet" type="text/css" href="../css/daterangepicker.css?v=1.15" />
+<script type="text/javascript" src="../js/moment.min.js?v=1.15"></script>
+<script type="text/javascript" src="../js/jquery.cascade-select.js?v=1.15"></script>
+<script type="text/javascript" src="../js/select2.js?v=1.15"></script>
+<script type="text/javascript" src="../js/daterangepicker.js?v=1.15"></script>
 <script>
 	$(document).ready(function(e) {
 		//$('#dt_inicio_afastamento').val(moment().format('L'));
@@ -160,100 +160,103 @@ require_once "../../engine/config.php";
 <br />
 
 <div class="containter col-md-12 well">
-<h2 class="text-center">Inserir Afastamento</h2>
-<br />
-<br />
-<section class="row"> <!-- Menu de Salvar/Voltar -->
-	<section class="col-md-12 text-left">
-		<section class="btn-group" role="group">
-			<button type="button" class="btn btn-info" id="Voltar">
-				<span class="glyphicon glyphicon-menu-left"></span>Voltar
-			</button>
-			<button type="button" class="btn btn-success" id="Salvar">
-				<span class="glyphicon glyphicon-save" aria-hidden="true"></span>Salvar
-			</button>
-		</section>
-	</section>
-</section> <!-- Menu de Salvar/Voltar -->
-<br />
-<section class="row"><!-- Primeira Linha -->
-	<section class="col-md-4">  <!-- Selecionar Curso -->
-		<div class="form-group">
-		  <label for="sel_curso">Filtrar por Curso:</label>
-		  <select class="form-control" id="sel_curso">
-		  <option value=""> -- Selecione -- </option>
-		    <?php 
-		    $Curso = new Curso();
-		    $Curso = $Curso->ReadAll();
-		    if(empty($Curso)){
-		    ?>
-		    	<option>Nenhum curso encontrado</option>
-		    <?php
-          		}
-    			else{
-    			foreach($Curso as $cursoRow){
-			    ?>
-		    <option value="<?php echo $cursoRow['id_curso']?>"><?php echo $cursoRow['nome_curso']?></option>
-		    <?php
-    				}
-    			}
-			    ?>
-		  </select>
-		</div>
-	</section> <!-- Selecionar Curso -->
-	<section class="col-md-8"> <!-- Selecionar Docente-->	
-		<div class="form-group">
-		  <label for="id_docente">Selecionar Docente:</label>
-		  <select class="form-control" id="id_docente">
-		  <option class="sel_curso" value=""> -- Selecione um Curso -- </option>
-		  </select>
-		</div>
-	</section><!-- Selecionar Docente-->	
-</section> <!-- Primeira Linha -->
-
-<section class="row"> <!-- Segunda Linha -->
-	<section class="col-md-4"> <!-- Selecionar Datas-->
-		<div class="form-group has-feedback has-feedback-right">
-			<input type="hidden" id="dt_inicio_afastamento" value="<?php echo date("Y-m-d");?>">
-			<input type="hidden" id="dt_fim_afastamento" value="<?php echo date("Y-m-d");?>">
-			<label class="control-label">Escolha o intervalo de datas</label>
-			<i class="form-control-feedback glyphicon glyphicon-calendar"></i>
-			<input id="escolhe_data" name="escolhe_data" class="input-mini form-control" type="text">
-		</div>
-	</section><!-- Selecionar Datas-->
-	<section class="col-md-8">  <!-- Selecionar Ocorrência-->
-	<div class="form-group">
-		<label for="id_ocorrencia">Selecionar a Ocorrência:</label>
-		<select class="form-control" id="id_ocorrencia" style="width: 100%">
-		<option value=""> -- Selecione -- </option>
-		<?php 
-		    $Ocorrencia = new Ocorrencia();
-		    $Ocorrencia = $Ocorrencia->ReadAll();
-		    if(empty($Ocorrencia)){
-		    ?>
-		    	<option>Nenhum curso encontrado</option>
-		    <?php
-          		}
-    			else{
-    			foreach($Ocorrencia as $ocorrenciaRow){
-			    ?>
-		    <option value="<?php echo $ocorrenciaRow['id_ocorrencia']?>"><?php
-		    echo $ocorrenciaRow['codigo_ocorrencia']." - ".$ocorrenciaRow['tipo_ocorrencia']
-		    ?></option>
-		    <?php
-    				}
-    			}
-			    ?>
-		</select>
-	</div>
-	</section> <!-- Selecionar Ocorrência-->
-</section> <!-- Segunda Linha-->
-
-<section class="row"> <!-- Terceira Linha-->
-	<section class="col-md-12"> <!-- Campo de Observação -->
-		<label for="observ_afastamento">Observação:</label>
-		<textarea class="form-control" rows="2" id="observ_afastamento" maxlength="195"></textarea>
-	</section> <!-- Campo de Observação -->
-</section> <!-- Terceira Linha-->
+  <h2 class="text-center">Inserir Afastamento</h2>
+  <br />
+  <br />
+  <section class="row"> <!-- Menu de Salvar/Voltar -->
+      <section class="col-md-12 text-left">
+          <section class="btn-group" role="group">
+              <button type="button" class="btn btn-info" id="Voltar">
+                  <span class="glyphicon glyphicon-menu-left"></span>Voltar
+              </button>
+              <button type="button" class="btn btn-success" id="Salvar">
+                  <span class="glyphicon glyphicon-save" aria-hidden="true"></span>Salvar
+              </button>
+          </section>
+      </section>
+  </section> <!-- Menu de Salvar/Voltar -->
+  <br />
+  <section class="row"><!-- Primeira Linha -->
+      <section class="col-md-4">  <!-- Selecionar Curso -->
+          <div class="form-group">
+            <label for="sel_curso">Filtrar por Curso:</label>
+            <select class="form-control" id="sel_curso">
+            <option value=""> -- Selecione -- </option>
+              <?php 
+              $Curso = new Curso();
+              $Curso = $Curso->ReadAll();
+              if(empty($Curso)){
+              ?>
+                  <option>Nenhum curso encontrado</option>
+              <?php
+                  }
+                  else{
+                  foreach($Curso as $cursoRow){
+                  ?>
+              <option value="<?php echo $cursoRow['id_curso']?>"><?php echo $cursoRow['nome_curso']?></option>
+              <?php
+                      }
+                  }
+                  ?>
+            </select>
+          </div>
+      </section> <!-- Selecionar Curso -->
+      <section class="col-md-8"> <!-- Selecionar Docente-->	
+          <div class="form-group">
+            <label for="id_docente">Selecionar Docente:</label>
+            <select class="form-control" id="id_docente">
+            <option class="sel_curso" value=""> -- Selecione um Curso -- </option>
+            </select>
+          </div>
+      </section><!-- Selecionar Docente-->	
+  </section> <!-- Primeira Linha -->
+  
+  <section class="row"> <!-- Segunda Linha -->
+      <section class="col-md-4"> <!-- Selecionar Datas-->
+          <div class="form-group has-feedback has-feedback-right">
+              <input type="hidden" id="dt_inicio_afastamento" value="<?php echo date("Y-m-d");?>">
+              <input type="hidden" id="dt_fim_afastamento" value="<?php echo date("Y-m-d");?>">
+              <label class="control-label">Escolha o intervalo de datas</label>
+              <i class="form-control-feedback glyphicon glyphicon-calendar"></i>
+              <input id="escolhe_data" name="escolhe_data" class="input-mini form-control" type="text">
+          </div>
+      </section><!-- Selecionar Datas-->
+      <section class="col-md-8">  <!-- Selecionar Ocorrência-->
+          <div class="form-group">
+              <label for="id_ocorrencia">Selecionar a Ocorrência:</label>
+              <section>
+                  <select class="form-control" id="id_ocorrencia" style="width: 100%">
+                      <option value=""> -- Selecione -- </option>
+                      <?php 
+                          $Ocorrencia = new Ocorrencia();
+                          $Ocorrencia = $Ocorrencia->ReadAll();
+                          if(empty($Ocorrencia)){
+                          ?>
+                              <option>Nenhum curso encontrado</option>
+                          <?php
+                          }
+                          else{
+                              foreach($Ocorrencia as $ocorrenciaRow){
+                                  if($ocorrenciaRow['id_ocorrencia'] == 37){}
+                                  else{
+                                  ?>
+                                      <option value="<?php echo $ocorrenciaRow['id_ocorrencia']?>"><?php echo $ocorrenciaRow['codigo_ocorrencia']." - ".$ocorrenciaRow['tipo_ocorrencia'] ?></option>
+                                  <?php
+                                  }
+                              }
+                          }
+                          ?>
+                  </select>
+              </section>
+          </div>
+      </section> <!-- Selecionar Ocorrência-->
+  </section> <!-- Segunda Linha-->
+  
+  <section class="row"> <!-- Terceira Linha-->
+      <section class="col-md-12"> <!-- Campo de Observação -->
+          <label for="observ_afastamento">Observação:</label>
+          <textarea class="form-control" rows="2" id="observ_afastamento" maxlength="195"></textarea>
+      </section> <!-- Campo de Observação -->
+  </section> <!-- Terceira Linha-->
 </div> <!-- Fecha Well -->
 

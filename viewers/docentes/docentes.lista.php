@@ -70,6 +70,11 @@
 			$('#docenteloader').load('afastamento/afastamento.editar.anoferias.php');
 		});
 		
+		$('#AnoFeriasMarcadas').click(function(e) {
+			e.preventDefault();
+			$('#docenteloader').load('afastamento/afastamento.editar.anoferias.marcadas.php');
+		});
+		
 		//Collapse Control
 
 		  $('#Data-bar').on('show.bs.collapse', function (e) {
@@ -202,7 +207,7 @@ $Data = getdate ();
 		</section>
         
         <section class="col-md-12">
-			<button class="btn btn-warning col-md-12" id="AnoFerias"
+			<button class="btn btn-warning col-md-12" id="AnoFeriasMarcadas"
 				type="button">Editar Férias Marcadas</button>
 		</section>
 		

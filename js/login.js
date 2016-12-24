@@ -47,4 +47,12 @@ $(document).ready(function(e) {
   		}
 	});  
 	
+ 	$('#email_login').keypress(function (e) {
+ 		var key = e.which;
+ 		if(key == 13){
+    		$('#Logar').click();
+    		return false;  
+  		}
+	}); 
+	
 });
