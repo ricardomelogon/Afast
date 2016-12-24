@@ -1,5 +1,4 @@
-﻿
-<?php
+﻿<?php
 
 require_once('../../engine/config.php');
 	
@@ -184,191 +183,200 @@ date_default_timezone_set( 'America/Sao_Paulo' );
     <title>ICT AFAST - Relatório Mensal</title>
     <link rel="stylesheet" media="print" href="../css/print.css?v=1.15">
 </head>
-
 <body>
-
-<section class="navprintmargin2"></section>
-<section class="row headmargin">
-  <section class="col-md-2"></section>
-  <section class="col-md-1">
-          <img 
-              class="img-responsive"
-              height="100px"
-              width="100px"
-              src="../img/logo_brasao_republica.png"
-              alt="Brasao"
-          >
-  </section>
-
-  <section class="col-md-6 nopadding">
-  	<section class="text-center">
-    	<h3> MINISTÉRIO DA EDUCAÇÃO </h3>
-        <h5><strong> UNIVERSIDADE FEDERAL DOS VALES DO JEQUITINHONHA E MUCURI </strong></h5>
-    </section>
-  </section>
-  
-  <section class="col-md-1">
-          <img 
-              class="img-responsive"
-              height="100px"
-              width="100px"
-              src="../img/logo_ufvjm.png"
-              alt="Logo UFVJM"
-           >
-  </section>
-  <section class="col-md-2"></section>
-</section>
-<?php
-	$Cursonome = new Curso();
-	$Cursonome = $Cursonome->Read($curso);
-?>
-<section class="row">
-	<section class="text-center">
-    	<h3 class="lessmarginbot"> INSTITUTO DE CIÊNCIA DE TECNOLOGIA </h3>
-        <h4 class="lessmarginbot lessmargintop"> BOLETIM DE FREQUÊNCIA - <?php echo $Cursonome['nome_curso']; ?> </h4>
-        <h3 class="lessmarginbot lessmargintop"> <?php echo (strtoupper( strftime( "%B" , mktime(0, 0, 0, $mes+1, 0, 0) ) ) ); echo "/"; echo $ano;?> </h3>
-    </section>
-</section>
-<br><br><br>     
-
-<?php
-	$Docente = new Docente();
-	$Docente = $Docente->ReadAllReport($ano."-".$mes, $curso, $efetivo);
-	//var_dump($Docente);
-	$Afastamento = new Afastamento();
-	$Afastamento = $Afastamento->ReadAllReport($ano."-".$mes, $curso);
-	//var_dump($Afastamento);
-	if(empty($Afastamento)) {}
-	else
-	{
-	  if (count ( $Afastamento ) == count ( $Afastamento, COUNT_RECURSIVE )) 
-	  {
-		  $Afastamento = array ($Afastamento);
-	  }
-	  foreach($Afastamento as &$FixAfastamentoRow)
-	  {
-		  $FixAfastamentoRow['dt_inicio_afastamento'] = 
-			  fixfirstdate($FixAfastamentoRow['dt_inicio_afastamento'],$mes,$ano);
-		  
-		  $FixAfastamentoRow['dt_fim_afastamento'] = 
-			  fixlastdate($FixAfastamentoRow['dt_fim_afastamento'],$mes,$ano);
-	  }
-	  //var_dump($Afastamento);
-	}//Pega todos os afastamentos e acerta eles para o mês atual.
-	$CountBreak = 0;
-	foreach ($Docente as $DocenteRow)
-	{
-		$Quantidade = 0;
-		$DiasEfetivos = diasefetivos($DocenteRow['dt_inicio_exercicio'],$DocenteRow['dt_fim_exercicio'],$mes,$ano);
-		$Listadias = getdaylist($DocenteRow['dt_inicio_exercicio'],$DocenteRow['dt_fim_exercicio'],$mes,$ano);
-		$Observs = array();
-		$Obsindex = 0;
-		?>
-        <section class="row">
-        <section>
-        	<section class="col-md-2"></section>
-        	<section class="col-md-8 printcenter">
-        		<p class="docenteheader" >
-                	<span class="tabspaceright">Servidor(a): 
-                    	<strong><?php echo $DocenteRow['nome_docente'];?></strong></span>
-                    <span class="tabspaceleft">SIAPE: 
-                    	<strong><?php echo $DocenteRow['siape_docente']?></strong></span>
-                </p>
-                <table class="tablesize">
-                  <tr class="simpleborder">
-                    <th class="simpleborder rel_ocorrencia"><strong>Ocorrência:</strong></th>
-                    <th class="simpleborder rel_descricao"><strong>Descrição:</strong></th>
-                    <th class="simpleborder rel_quantidade"><strong>Quantidade:</strong></th>
-                    <th class="simpleborder rel_diasdomes"><strong>Dias do Mês:</strong></th>
-                  </tr>
+	<main role="main" class="main">
+        <section class="tabs">
+            <div class="tabbed-content">
+                <section class="navprintmargin2"></section>
+                <section class="row headmargin">
+                    <section class="col-md-2"></section>
+                    <section class="col-md-1">
+                            <img 
+                                class="img-responsive"
+                                height="100px"
+                                width="100px"
+                                src="../img/logo_brasao_republica.png"
+                                alt="Brasao"
+                            >
+                    </section>
+                  
+                    <section class="col-md-6 nopadding">
+                      <section class="text-center">
+                          <h3> MINISTÉRIO DA EDUCAÇÃO </h3>
+                          <h5><strong> UNIVERSIDADE FEDERAL DOS VALES DO JEQUITINHONHA E MUCURI </strong></h5>
+                      </section>
+                    </section>
+                    
+                    <section class="col-md-1">
+                            <img 
+                                class="img-responsive"
+                                height="100px"
+                                width="100px"
+                                src="../img/logo_ufvjm.png"
+                                alt="Logo UFVJM"
+                             >
+                    </section>
+                    <section class="col-md-2"></section>
+                </section>
                 <?php
-					//var_dump($DocenteRow);
-					foreach($Afastamento as $indice => &$AfastamentoRow){	
-						if($AfastamentoRow['siape_docente'] == $DocenteRow['siape_docente']){
-							$AfastamentoRow['dt_inicio_afastamento'] = fixbystart($AfastamentoRow['dt_inicio_afastamento'],$DocenteRow['dt_inicio_exercicio']);
-							$AfastamentoRow['dt_fim_afastamento'] = fixbyend($AfastamentoRow['dt_fim_afastamento'],$DocenteRow['dt_fim_exercicio']);
-				?>
-                  <tr class="simpleborder">
-                  	<td class="simpleborder"> <?php echo $AfastamentoRow['codigo_ocorrencia'] ?> </td>
-                    <td class="simpleborder"> <?php echo $AfastamentoRow['tipo_ocorrencia']?></td>
-                    <td class="simpleborder"> <?php echo $quantdays = getquantdays($AfastamentoRow['dt_inicio_afastamento'],$AfastamentoRow['dt_fim_afastamento']);
-													$Daystoadd = geteffectivedays($AfastamentoRow['dt_inicio_afastamento'],$AfastamentoRow['dt_fim_afastamento'],$Listadias);
-													//var_dump($Listadias);
-													$Quantidade = $Quantidade + $Daystoadd;
-													if(empty($AfastamentoRow['observ_afastamento'])){}
-													else{
-														$Observs [$Obsindex] = array($AfastamentoRow['codigo_ocorrencia'], $AfastamentoRow['observ_afastamento']);
-														$Obsindex++; 
-													}
-													unset($Afastamento[$indice]);
-											   ?>
-                    </td>
-                    <td class="simpleborder"> <?php	echo getlistday($AfastamentoRow['dt_inicio_afastamento'],$AfastamentoRow['dt_fim_afastamento']); ?> </td>
-                  </tr>
-				 <?php
-						}
-					}
-				 ?>
-                </table>
+                $Cursonome = new Curso();
+                $Cursonome = $Cursonome->Read($curso);
+                ?>
+                <section class="row" id="reportlabel">
+                    <section class="text-center">
+                        <h3 class="lessmarginbot"> INSTITUTO DE CIÊNCIA DE TECNOLOGIA </h3>
+                        <h4 class="lessmarginbot lessmargintop"> BOLETIM DE FREQUÊNCIA - <?php echo $Cursonome['nome_curso']; ?> </h4>
+                        <h3 class="lessmarginbot lessmargintop"> <?php echo (strtoupper( strftime( "%B" , mktime(0, 0, 0, $mes+1, 0, 0) ) ) ); echo "/"; echo $ano;?> </h3>
+                    </section>
+                </section>
                 <?php
-					$DiasEfetivos = $DiasEfetivos - $Quantidade;
-					if(!empty($Observs ))
+					$Docente = new Docente();
+					$Docente = $Docente->ReadAllReport($ano."-".$mes, $curso, $efetivo);
+					//var_dump($Docente);
+					$Afastamento = new Afastamento();
+					$Afastamento = $Afastamento->ReadAllReport($ano."-".$mes, $curso);
+					//var_dump($Afastamento);
+					if(empty($Afastamento)) {}
+					else
 					{
-					  if (count ( $Observs ) == count ( $Observs , COUNT_RECURSIVE )) 
+					  if (count ( $Afastamento ) == count ( $Afastamento, COUNT_RECURSIVE )) 
 					  {
-						  $Observs = array ($Observs );
+						  $Afastamento = array ($Afastamento);
 					  }
-				?>
-                <p class="paragmargin">
-                	<strong>Observações:</strong>
-                    <br>
-					<?php
-					foreach($Observs as $ObservRow)
-                    {
-                        echo $ObservRow['0']."\t".$ObservRow['1'];
-					?>
-                    <br>
-                    <?php	
-                    }
-                    ?>
-                	<br>
-                </p>
-              	<?php 
+					  foreach($Afastamento as &$FixAfastamentoRow)
+					  {
+						  $FixAfastamentoRow['dt_inicio_afastamento'] = 
+							  fixfirstdate($FixAfastamentoRow['dt_inicio_afastamento'],$mes,$ano);
+						  
+						  $FixAfastamentoRow['dt_fim_afastamento'] = 
+							  fixlastdate($FixAfastamentoRow['dt_fim_afastamento'],$mes,$ano);
+					  }
+					  //var_dump($Afastamento);
+					}//Pega todos os afastamentos e acerta eles para o mês atual.
+					$BreakBefore =0;
+					$Spacer = 1;
+					foreach ($Docente as $DocenteRow)
+					{
+						$Quantidade = 0;
+						$DiasEfetivos = diasefetivos($DocenteRow['dt_inicio_exercicio'],$DocenteRow['dt_fim_exercicio'],$mes,$ano);
+						$Listadias = getdaylist($DocenteRow['dt_inicio_exercicio'],$DocenteRow['dt_fim_exercicio'],$mes,$ano);
+						$Observs = array();
+						$Obsindex = 0;
+						$BreakBefore++;
+						?>
+                        <section class="row<?php if($BreakBefore >= 4){echo ' break-after';}?>">
+						<section>
+							<section class="col-md-2"></section>
+							<section class="col-md-8 printcenter">
+								<p class="docenteheader" >
+									<span class="tabspaceright">Servidor(a): <strong><?php echo $DocenteRow['nome_docente'];?></strong></span>
+									<span class="tabspaceleft">SIAPE: <strong><?php echo $DocenteRow['siape_docente']?></strong></span>
+								</p>
+								<table class="tablesize">
+								  <tr class="simpleborder">
+								    <th class="simpleborder rel_ocorrencia"><strong>Ocorrência:</strong></th>
+									<th class="simpleborder rel_descricao"><strong>Descrição:</strong></th>
+									<th class="simpleborder rel_quantidade"><strong>Quantidade:</strong></th>
+									<th class="simpleborder rel_diasdomes"><strong>Dias do Mês:</strong></th>
+								  </tr>
+								<?php
+									//var_dump($DocenteRow);
+									foreach($Afastamento as $indice => &$AfastamentoRow){	
+										if($AfastamentoRow['siape_docente'] == $DocenteRow['siape_docente']){
+											$AfastamentoRow['dt_inicio_afastamento'] = fixbystart($AfastamentoRow['dt_inicio_afastamento'],$DocenteRow['dt_inicio_exercicio']);
+											$AfastamentoRow['dt_fim_afastamento'] = fixbyend($AfastamentoRow['dt_fim_afastamento'],$DocenteRow['dt_fim_exercicio']);
+								?>
+								  <tr class="simpleborder">
+									<td class="simpleborder"> <?php echo $AfastamentoRow['codigo_ocorrencia'] ?> </td>
+									<td class="simpleborder"> <?php echo $AfastamentoRow['tipo_ocorrencia']?></td>
+									<td class="simpleborder"> 
+										<?php echo $quantdays = getquantdays($AfastamentoRow['dt_inicio_afastamento'],$AfastamentoRow['dt_fim_afastamento']);
+										$Daystoadd = geteffectivedays($AfastamentoRow['dt_inicio_afastamento'],$AfastamentoRow['dt_fim_afastamento'],$Listadias);
+										$Quantidade = $Quantidade + $Daystoadd;
+										if(empty($AfastamentoRow['observ_afastamento'])){}
+										else{
+											$Observs [$Obsindex] = array($AfastamentoRow['codigo_ocorrencia'], $AfastamentoRow['observ_afastamento']);
+											$Obsindex++; 
+										}
+										unset($Afastamento[$indice]);
+										?>
+									</td>
+									<td class="simpleborder"> <?php	echo getlistday($AfastamentoRow['dt_inicio_afastamento'],$AfastamentoRow['dt_fim_afastamento']); ?> </td>
+								  </tr>
+								 <?php
+										} //If
+									} //Foreach
+								 ?>
+								</table>
+								<?php
+									$DiasEfetivos = $DiasEfetivos - $Quantidade;
+									if(!empty($Observs )){
+									  if (count ( $Observs ) == count ( $Observs , COUNT_RECURSIVE )){
+										  $Observs = array ($Observs );
+									  }
+								?>
+								<p class="paragmargin">
+									<strong>Observações:</strong>
+									<br>
+									<?php
+									foreach($Observs as $ObservRow)
+									{
+										echo $ObservRow['0']."\t".$ObservRow['1'];
+									?>
+									<br>
+									<?php	
+									}
+									?>
+									<br>
+								</p>
+								<?php 
+									}
+								?>
+								<p>
+									<span class="tabspacerightbottom"><strong>Efetivo: <?php echo $DiasEfetivos; ?></strong></span>
+									<span class="tabspaceright"><strong>Afastamento/Ocorrência: <?php echo $Quantidade; ?></strong></span>
+								</p>
+								<section class="rel_endline"></section>
+							</section>
+							<section class="col-md-2"></section>
+						</section>               
+						</section>
+                        <?php if($BreakBefore >= 4){$BreakBefore = 0; ?> <section class="spacersection break-before" style="min-height:<?php echo str_replace(',', '.',$Spacer).'cm'; $Spacer = $Spacer+0.5; ?>;"></section> <?php } ?>
+						<?php
 					}
 				?>
-                <p>
-                	<span class="tabspacerightbottom">
-                    	<strong>Efetivo: <?php echo $DiasEfetivos; ?>
-                        </strong>
-                    </span>
-                    <span class="tabspaceright">
-                    	<strong>Afastamento/Ocorrência: <?php echo $Quantidade; ?>
-                        </strong>
-                    </span>
-                </p>
-           		<section class="rel_endline"></section>
-            </section>
-            <section class="col-md-2"></section>
+                <section id="reportfooter" class="row">
+                    <section class="col-md-8 centermarginbottom">
+                      <p>Este documento foi elaborado com base nas informações/solicitações apresentadas pelos respectivos servidores à Direção do ICT, atendendo, primordialmente, ao disposto no inciso I do Art. 117 da Lei 8.112/90. Desta forma, o documento pode ser passível de alteração caso o(s) servidor(es) não tenha(m) cumprido com seu dever de comunicar à chefia sobre ausências do local de trabalho.</p>
+                    </section>
+                    
+                    <section class="col-md-8 centermarginbottom">
+                      <p><?php echo $ObservText; ?></p>
+                    </section>
+                    
+                    <section class="col-md-8 signaturemargin tablesize printcenter centermarginbottom">
+                        <span class="printdate signaturetop col-md-3"><h4><strong>Em <?php echo date('d-m-Y');?></strong></h4></span>
+                        <span class="signatureline signaturetop col-md-5"><h4><strong>ENCARREGADO DA FREQUÊNCIA</strong></h4></span>
+                        <span class="signatureline signaturetop col-md-4"><h4><strong>CHEFE DA SEÇÃO</strong></h4></span>
+                    </section>
+                </section>
+            </div>
         </section>
-        </section>
-		<?php
-		
-	}
-?>
-
-<section class="col-md-8 centermarginbottom">
-  <p>Este documento foi elaborado com base nas informações/solicitações apresentadas pelos respectivos servidores à Direção do ICT, atendendo, primordialmente, ao disposto no inciso I do Art. 117 da Lei 8.112/90. Desta forma, o documento pode ser passível de alteração caso o(s) servidor(es) não tenha(m) cumprido com seu dever de comunicar à chefia sobre ausências do local de trabalho.</p>
-</section>
-
-<section class="col-md-8 centermarginbottom">
-  <p><?php echo $ObservText; ?></p>
-</section>
-
-<section class="col-md-8 signaturemargin tablesize printcenter centermarginbottom">
-    <span class="printdate signaturetop col-md-3"><h4><strong>Em <?php echo date('d-m-Y');?></strong></h4></span>
-    <span class="signatureline signaturetop col-md-5"><h4><strong>ENCARREGADO DA FREQUÊNCIA</strong></h4></span>
-    <span class="signatureline signaturetop col-md-4"><h4><strong>CHEFE DA SEÇÃO</strong></h4></span>
-</section>
-
-
+    </main>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

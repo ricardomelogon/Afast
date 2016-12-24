@@ -28,7 +28,7 @@
 			var efetivo = $('#efetivo').val();
 			var observtext = $('#observtext').val();
 			$('#loader').empty();
-			$('#printloader').load('relatorio/teste.php?v=1.15',{mes: mes, curso: curso, efetivo:efetivo, observtext:observtext});			
+			$('#printloader').load('relatorio/relatorio.php?v=1.15',{mes: mes, curso: curso, efetivo:efetivo, observtext:observtext});			
 		});
 
 		
