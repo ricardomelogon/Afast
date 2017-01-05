@@ -366,7 +366,6 @@ $(document).ready(function(e) {
 			var printfiller = 28*cmheight - $('#printpage-'+count).height();
 			$('#printpage-'+count).append("<section id="+'printpagespacer-'+count+"></section>");
 			$('#printpagespacer-'+count).css('height', printfiller);
-			alert($('#printpage-'+count).height());
 			count++;
 			$('.tabbed-content').append("<section class="+'printpagebreak'+" id="+'printpage-'+count+"></section>");
 			$(this).detach().appendTo('#printpage-'+count);	
