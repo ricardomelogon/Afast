@@ -30,4 +30,4 @@ foreach ( $Afastamento as $afastamentoRow ){
 $Count++;
 ?>
 
-<script type="text/javascript" src="../js/viewers/afastamento/afastamento.editar.anoferias.marcadas.save.js?v=1.15"></script>
+<script type="text/javascript" src="../js/viewers/afastamento/afastamento.editar.anoferias.marcadas.save.js?v=1.18"></script>

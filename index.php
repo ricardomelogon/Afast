@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <title>AFAST ICT :: Login</title>
-<link rel="stylesheet" href="css/bootstrap.css?v=1.15">
-<link rel="stylesheet" href="css/style.css?v=1.15">
+<link rel="stylesheet" href="css/bootstrap.css?v=1.18">
+<link rel="stylesheet" href="css/style.css?v=1.18">
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top ">
@@ -47,9 +47,9 @@
 				reservados.</p>
 		</section>
 	</footer>
-	<script src="js/jquery.js?v=1.15"></script>
-	<script src="js/jquerymask.min.js?v=1.15"></script>
-	<script type="text/javascript" src="js/bootstrap.js?v=1.15"></script>
-	<script src="js/login.js?v=1.15"></script>
+	<script src="js/jquery.js?v=1.18"></script>
+	<script src="js/jquerymask.min.js?v=1.18"></script>
+	<script type="text/javascript" src="js/bootstrap.js?v=1.18"></script>
+	<script src="js/login.js?v=1.18"></script>
 </body>
 </html>

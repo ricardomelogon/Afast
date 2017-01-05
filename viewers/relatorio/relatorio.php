@@ -181,7 +181,7 @@ date_default_timezone_set( 'America/Sao_Paulo' );
 <head>
     <meta charset="utf-8">
     <title>ICT AFAST - Relatório Mensal</title>
-    <link rel="stylesheet" media="print" href="../css/print.css?v=1.15">
+    <link rel="stylesheet" media="print" href="../css/print.css?v=1.18">
 </head>
 <body>
 	<main role="main" class="main">
@@ -190,31 +190,17 @@ date_default_timezone_set( 'America/Sao_Paulo' );
                 <section class="navprintmargin2"></section>
                 <section class="row headmargin">
                     <section class="col-md-2"></section>
-                    <section class="col-md-1">
-                            <img 
-                                class="img-responsive"
-                                height="100px"
-                                width="100px"
-                                src="../img/logo_brasao_republica.png"
-                                alt="Brasao"
-                            >
+                    <section class="col-md-1" style="max-width: 3cm;">
+                            <img class="imageprintsize" height="100px" width="100px" src="../img/logo_brasao_republica.png" alt="Brasao">
                     </section>
-                  
                     <section class="col-md-6 nopadding">
                       <section class="text-center">
                           <h3> MINISTÉRIO DA EDUCAÇÃO </h3>
                           <h5><strong> UNIVERSIDADE FEDERAL DOS VALES DO JEQUITINHONHA E MUCURI </strong></h5>
                       </section>
                     </section>
-                    
                     <section class="col-md-1">
-                            <img 
-                                class="img-responsive"
-                                height="100px"
-                                width="100px"
-                                src="../img/logo_ufvjm.png"
-                                alt="Logo UFVJM"
-                             >
+                            <img class="imageprintsize" height="100px" width="100px" src="../img/logo_ufvjm.png" alt="Logo UFVJM">
                     </section>
                     <section class="col-md-2"></section>
                 </section>
@@ -223,11 +209,13 @@ date_default_timezone_set( 'America/Sao_Paulo' );
                 $Cursonome = $Cursonome->Read($curso);
                 ?>
                 <section class="row" id="reportlabel">
-                    <section class="text-center">
+                	<section class="col-md-2"></section>
+                    <section class="text-center col-md-8 labeltext">
                         <h3 class="lessmarginbot"> INSTITUTO DE CIÊNCIA DE TECNOLOGIA </h3>
                         <h4 class="lessmarginbot lessmargintop"> BOLETIM DE FREQUÊNCIA - <?php echo $Cursonome['nome_curso']; ?> </h4>
                         <h3 class="lessmarginbot lessmargintop"> <?php echo (strtoupper( strftime( "%B" , mktime(0, 0, 0, $mes+1, 0, 0) ) ) ); echo "/"; echo $ano;?> </h3>
                     </section>
+                    <section class="col-md-2"></section>
                 </section>
                 <?php
 					$Docente = new Docente();
@@ -253,8 +241,6 @@ date_default_timezone_set( 'America/Sao_Paulo' );
 					  }
 					  //var_dump($Afastamento);
 					}//Pega todos os afastamentos e acerta eles para o mês atual.
-					$BreakBefore =0;
-					$Spacer = 1;
 					foreach ($Docente as $DocenteRow)
 					{
 						$Quantidade = 0;
@@ -262,9 +248,8 @@ date_default_timezone_set( 'America/Sao_Paulo' );
 						$Listadias = getdaylist($DocenteRow['dt_inicio_exercicio'],$DocenteRow['dt_fim_exercicio'],$mes,$ano);
 						$Observs = array();
 						$Obsindex = 0;
-						$BreakBefore++;
 						?>
-                        <section class="row<?php if($BreakBefore >= 4){echo ' break-after';}?>">
+                        <section class="row">
 						<section>
 							<section class="col-md-2"></section>
 							<section class="col-md-8 printcenter">
@@ -341,7 +326,6 @@ date_default_timezone_set( 'America/Sao_Paulo' );
 							<section class="col-md-2"></section>
 						</section>               
 						</section>
-                        <?php if($BreakBefore >= 4){$BreakBefore = 0; ?> <section class="spacersection break-before" style="min-height:<?php echo str_replace(',', '.',$Spacer).'cm'; $Spacer = $Spacer+0.5; ?>;"></section> <?php } ?>
 						<?php
 					}
 				?>
@@ -364,8 +348,32 @@ date_default_timezone_set( 'America/Sao_Paulo' );
         </section>
     </main>
 </body>
+</html>
 
-
+<script>
+$(document).ready(function(e) {
+    var div = $("<div></div>").css("height","1cm");
+	$("body").prepend(div);
+	var cmheight = div.height();
+	div.remove();
+	var count = 0;
+	$('.tabbed-content').append("<section class="+'printpagebreak'+" id="+'printpage-'+count+"></section>");
+	$('.tabbed-content').children('.row').each(function(){
+		if(($('#printpage-'+count).height() + $(this).height()) < 28*cmheight ){
+			$(this).detach().appendTo('#printpage-'+count);
+		}
+		else{
+			var printfiller = 28*cmheight - $('#printpage-'+count).height();
+			$('#printpage-'+count).append("<section id="+'printpagespacer-'+count+"></section>");
+			$('#printpagespacer-'+count).css('height', printfiller);
+			alert($('#printpage-'+count).height());
+			count++;
+			$('.tabbed-content').append("<section class="+'printpagebreak'+" id="+'printpage-'+count+"></section>");
+			$(this).detach().appendTo('#printpage-'+count);	
+		}
+	});
+});
+</script>
 
 
 

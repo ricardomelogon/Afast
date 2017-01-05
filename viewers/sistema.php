@@ -14,9 +14,9 @@ if (empty ( $_SESSION )) {
 <head>
     <meta charset="utf-8">
     <title>AFAST ICT</title>
-    <link rel="stylesheet" href="../css/bootstrap.css?v=1.15">
-	<link rel="stylesheet" href="../css/style.css?v=1.15">
-    <link rel="stylesheet" href="../css/bootstrap-datepicker3.css?v=1.15">
+    <link rel="stylesheet" href="../css/bootstrap.css?v=1.18">
+	<link rel="stylesheet" href="../css/style.css?v=1.18">
+    <link rel="stylesheet" href="../css/bootstrap-datepicker3.css?v=1.18">
 </head>
 
 <body>
@@ -55,14 +55,14 @@ if (empty ( $_SESSION )) {
 		</section>
 	</footer>
 
-	<script type="text/javascript" src="../js/jquery.js?v=1.15"></script>
-	<script type="text/javascript" src="../js/bootstrap.js?v=1.15"></script>
-    <script type="text/javascript" src="../js/jquerymask.min.js?v=1.15"></script>
-    <script type="text/javascript" src="../js/bootstrap-datepicker.js?v=1.15"></script>
-	<script type="text/javascript" src="../locales/bootstrap-datepicker.pt-BR.min.js?v=1.15"></script>
-	<script type="text/javascript" src="../locales/pt-br.js?v=1.15"></script>
-	<script type="text/javascript" src="../js/bootbox.min.js?v=1.15"></script>
-    <script type="text/javascript" src="../js/menu.js?v=1.15"></script>
-    <script type="text/javascript" src="../js/login.js?v=1.15"></script>
+	<script type="text/javascript" src="../js/jquery.js?v=1.18"></script>
+	<script type="text/javascript" src="../js/bootstrap.js?v=1.18"></script>
+    <script type="text/javascript" src="../js/jquerymask.min.js?v=1.18"></script>
+    <script type="text/javascript" src="../js/bootstrap-datepicker.js?v=1.18"></script>
+	<script type="text/javascript" src="../locales/bootstrap-datepicker.pt-BR.min.js?v=1.18"></script>
+	<script type="text/javascript" src="../locales/pt-br.js?v=1.18"></script>
+	<script type="text/javascript" src="../js/bootbox.min.js?v=1.18"></script>
+    <script type="text/javascript" src="../js/menu.js?v=1.18"></script>
+    <script type="text/javascript" src="../js/login.js?v=1.18"></script>
 </body>
 </html>

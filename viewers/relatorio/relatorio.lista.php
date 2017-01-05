@@ -1,11 +1,11 @@
 
-<link rel="stylesheet" type="text/css" href="../css/select2.css?v=1.15" />
-<link rel="stylesheet" type="text/css" href="../css/bootstrap-datepicker3.css?v=1.15" />
-<script type="text/javascript" src="../js/moment.min.js?v=1.15"></script>
-<script type="text/javascript" src="../js/jquery.cascade-select.js?v=1.15"></script>
-<script type="text/javascript" src="../js/select2.js?v=1.15"></script>
-<script type="text/javascript" src="../js/bootstrap-datepicker.js?v=1.15"></script>
-<script type="text/javascript" src="../js/bootstrap-datepicker.pt-BR.js?v=1.15"></script>
+<link rel="stylesheet" type="text/css" href="../css/select2.css?v=1.18" />
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-datepicker3.css?v=1.18" />
+<script type="text/javascript" src="../js/moment.min.js?v=1.18"></script>
+<script type="text/javascript" src="../js/jquery.cascade-select.js?v=1.18"></script>
+<script type="text/javascript" src="../js/select2.js?v=1.18"></script>
+<script type="text/javascript" src="../js/bootstrap-datepicker.js?v=1.18"></script>
+<script type="text/javascript" src="../js/bootstrap-datepicker.pt-BR.js?v=1.18"></script>
 <script>
 	$(document).ready(function(e) {
 		$('#bread_home').click(function(e) {
@@ -28,7 +28,7 @@
 			var efetivo = $('#efetivo').val();
 			var observtext = $('#observtext').val();
 			$('#loader').empty();
-			$('#printloader').load('relatorio/relatorio.php?v=1.15',{mes: mes, curso: curso, efetivo:efetivo, observtext:observtext});			
+			$('#printloader').load('relatorio/relatorio.php?v=1.18',{mes: mes, curso: curso, efetivo:efetivo, observtext:observtext});			
 		});
 
 		

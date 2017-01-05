@@ -103,4 +103,4 @@ echo '<input type="hidden" id="docente_count" value="'.$Docentesize.'">';
 ?>
 
 
-<script type="text/javascript" src="../js/viewers/afastamento/call_docentes_ferias.js?v=1.15"></script>
+<script type="text/javascript" src="../js/viewers/afastamento/call_docentes_ferias.js?v=1.18"></script>

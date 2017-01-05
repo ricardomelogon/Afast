@@ -10,7 +10,7 @@
 	  
 	  $('#gerar_relatorios').click(function(e) {
 		$('.sectionbtn').fadeOut(600, function(){
-			$('#loader').load('../viewers/relatorio/relatorio.lista.php?v=1.15');
+			$('#loader').load('../viewers/relatorio/relatorio.lista.php?v=1.18');
 		});
 	  });
 	  	

@@ -1,10 +1,10 @@
 
-<link rel="stylesheet" type="text/css" href="../css/select2.css?v=1.15" />
-<link rel="stylesheet" type="text/css" href="../css/daterangepicker.css?v=1.15" />
-<script type="text/javascript" src="../js/moment.min.js?v=1.15"></script>
-<script type="text/javascript" src="../js/jquery.cascade-select.js?v=1.15"></script>
-<script type="text/javascript" src="../js/select2.js?v=1.15"></script>
-<script type="text/javascript" src="../js/daterangepicker.js?v=1.15"></script>
+<link rel="stylesheet" type="text/css" href="../css/select2.css?v=1.18" />
+<link rel="stylesheet" type="text/css" href="../css/daterangepicker.css?v=1.18" />
+<script type="text/javascript" src="../js/moment.min.js?v=1.18"></script>
+<script type="text/javascript" src="../js/jquery.cascade-select.js?v=1.18"></script>
+<script type="text/javascript" src="../js/select2.js?v=1.18"></script>
+<script type="text/javascript" src="../js/daterangepicker.js?v=1.18"></script>
 <script>
 	$(document).ready(function(e) {
 		//$('#dt_inicio_afastamento').val(moment().format('L'));

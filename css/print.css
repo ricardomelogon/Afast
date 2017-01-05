@@ -13,7 +13,21 @@
 .headmargin {
 	margin-left: auto;
     margin-right: auto;
-    max-width: 21cm;
+	padding-left: 2cm;
+
+	}
+	
+#reportlabel{
+	padding-left: 0.5cm;
+	}
+	
+.imageprintsize{
+	width: 2cm;
+	height: 2cm;
+	}
+	
+.labeltext{
+	width: 22cm;
 	}
 	
 .nopadding {	
@@ -23,6 +37,7 @@
 	}
 
 .printcenter {
+	max-width: 21cm;
 	margin-left:1cm;
 	}
 
@@ -30,14 +45,55 @@
 	min-width:22cm;
 	}
 	
+.tabspaceleft {
+    margin-left: 0.52cm;
+}
+
+.tabspaceright {
+    float: left;
+    width: 10.48cm;
+}
+
+.tabspacerightbottom {
+    float: left;
+    width: 6.549cm;
+}
+
+.docenteheader {
+    margin-bottom: -0.77cm;
+}
+
+.rel_ocorrencia {
+    width: 2.17cm;
+}
+
+.rel_descricao {
+    width: 8.38cm;
+}
+
+.rel_quantidade {
+    width: 2.17cm;
+}
+
+.rel_diasdomes {
+    width: 6.74cm;
+}
+
+.navprintmargin2 {
+    margin-top: 3.6cm;
+}
+	
 .rel_endline {
 	min-width: 22cm;
     margin-top: 2cm;
     margin-bottom: 1cm;
+	width: 21cm;
 	}
+
 	
 .signaturemargin {
 	margin-bottom: 3cm;
+	padding-top: 1.796cm;
 	}
 
 .signaturetop {
@@ -53,16 +109,10 @@
 		position:relative;
 		}
 
-	.break-after {
+	.printpagebreak {
 		display: block;
 		page-break-after: always;
-		position: relative;
-	}
-	
-	.break-before {
-		display: block;
-		page-break-before: always;
-		position: relative;
+		position: relative
 	}
 	
 	.navbar {
@@ -88,6 +138,8 @@
 	.row{
         page-break-inside: avoid;
 		position: relative;
+		margin-right: 0px;
+    	margin-left: 0px;
     }
 	
 	#reportfooter{
