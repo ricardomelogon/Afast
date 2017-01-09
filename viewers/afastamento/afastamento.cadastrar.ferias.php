@@ -13,7 +13,7 @@
 			$('#afast_sistema').click();
     	});
 		
-		$('#Voltar').click(function(e) {
+		$('.Voltar').click(function(e) {
 			e.preventDefault();
 			//alert("Voltar");
 			$('#afast_sistema').click();
@@ -125,37 +125,49 @@
 		  	} //Else
 		}); //Salvar
 		
+		$('.DownloadCSV').click(function(e) {
+			var selcurso = $('#sel_curso').val();
+			var selano = $('#filtra_ano').val();
+			if(selcurso != "" && selano != ""){
+			  	$('#wait-animation').show();
+   				document.location.href = 'afastamento/call_docentes_ferias_csv.php?selcurso='+selcurso+'&selano='+selano;
+    			$('#wait-animation').hide();
+			}
+    	});
+		
+		$("#sel_curso").change(function(){
+			var selcurso = $(this).val();
+			var selano = $('#filtra_ano').val();
+			if(selcurso != "" && selano != ""){
+			  $.ajax({
+				  type: "POST",
+				  url: "afastamento/call_docentes_ferias.php",
+				  data: {selcurso: selcurso, selano: selano},
+				  dataType: "text",
+				  success: function(res){
+					  $("#docentelista").empty();
+					  $("#docentelista").append(res);
+				  }
+			  });
+			}
+		});
+		
+		$("#filtra_ano").datepicker( {
+		format: " yyyy",
+		viewMode: "years", 
+		minViewMode: "years",
+		});
+		
+		$("#filtra_ano").change(function(){
+			$("#sel_curso").trigger('change');	
+		});		
+		
 	}); // Document Ready
 </script>
 
 <script type="text/javascript">
 	 	
-	$("#sel_curso").change(function(){
-	    var selcurso = $(this).val();
-		var selano = $('#filtra_ano').val();
-	    if(selcurso != "" && selano != ""){
-		  $.ajax({
-			  type: "POST",
-			  url: "afastamento/call_docentes_ferias.php",
-			  data: {selcurso: selcurso, selano: selano},
-			  dataType: "text",
-			  success: function(res){
-				  $("#docentelista").empty();
-				  $("#docentelista").append(res);
-			  }
-		  });
-		}
-	});
-	
-	$("#filtra_ano").datepicker( {
-    format: " yyyy",
-    viewMode: "years", 
-    minViewMode: "years",
-	});
-	
-	$("#filtra_ano").change(function(){
-		$("#sel_curso").trigger('change');	
-	});
+
 	
 
 </script>
@@ -181,13 +193,16 @@ require_once "../../engine/config.php";
 <section class="row"> <!-- Menu de Salvar/Voltar -->
 	<section class="col-md-12 text-left">
 		<section class="btn-group" role="group">
-			<button type="button" class="btn btn-info" id="Voltar">
-				<span class="glyphicon glyphicon-menu-left"></span>Voltar
-			</button>
-			<button type="button" class="btn btn-success Salvar">
-				<span class="glyphicon glyphicon-save" aria-hidden="true"></span>Salvar
-			</button>
-		</section>
+              <button type="button" class="btn btn-info Voltar">
+                  <span class="glyphicon glyphicon-menu-left"></span> Voltar
+              </button>
+              <button type="button" class="btn btn-success Salvar">
+                  <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Salvar
+              </button>
+              <button type="button" class="btn btn-primary DownloadCSV">
+              	  <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Baixar CSV
+              </button>
+          </section>
 	</section>
 </section> <!-- Menu de Salvar/Voltar -->
 <br />
@@ -236,11 +251,14 @@ require_once "../../engine/config.php";
   <section class="row"> <!-- Menu de Salvar/Voltar -->
       <section class="col-md-12 text-left">
           <section class="btn-group" role="group">
-              <button type="button" class="btn btn-info" id="Voltar">
-                  <span class="glyphicon glyphicon-menu-left"></span>Voltar
+              <button type="button" class="btn btn-info Voltar">
+                  <span class="glyphicon glyphicon-menu-left"></span> Voltar
               </button>
               <button type="button" class="btn btn-success Salvar">
-                  <span class="glyphicon glyphicon-save" aria-hidden="true"></span>Salvar
+                  <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Salvar
+              </button>
+              <button type="button" class="btn btn-primary DownloadCSV">
+              	  <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Baixar CSV
               </button>
           </section>
       </section>
