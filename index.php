@@ -53,3 +53,22 @@
 	<script src="js/login.js?v=1.18"></script>
 </body>
 </html>
+
+<script>
+	var map = {65: false, 68: false, 77: false};
+	$(document).keydown(function(e) {
+		if (e.keyCode in map) {
+			map[e.keyCode] = true;
+			if (map[65] && map[68] && map[77]) {
+				alert("pagina admin");
+				map[65] = false;
+				map[68] = false; 
+				map[77] = false;
+			}
+		}
+	}).keyup(function(e) {
+		if (e.keyCode in map) {
+			map[e.keyCode] = false;
+		}
+	});
+</script>

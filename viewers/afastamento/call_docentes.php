@@ -1,4 +1,4 @@
-<option> Selecione um Docente...</option>
+<option value=""> Selecione um Docente...</option>
 <?php
 require_once('../../engine/config.php');
 $SelCurso = $_POST ['selcurso'];
